@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Information Security Panorama — Release Level 1</title>
+<style>
+:root{--bg:#06111f;--p:#0d1b2d;--p2:#10243a;--t:#eaf2fb;--m:#9eb2c7;--l:#25445f;--a:#74d7ff;--g:#86efac;--w:#fcd34d;--r:#fb7185;--v:#c4b5fd}*{box-sizing:border-box}body{margin:0;background:radial-gradient(1000px 500px at 20% -10%,#0c2940,transparent 60%),radial-gradient(850px 500px at 100% 0,#211843,transparent 55%),var(--bg);color:var(--t);font:15px/1.45 Inter,system-ui,-apple-system,Segoe UI,sans-serif}a{color:var(--a)}button,input{font:inherit}.top{position:sticky;top:0;z-index:10;background:#06111fe8;border-bottom:1px solid #ffffff12;backdrop-filter:blur(14px)}nav{max-width:1400px;margin:auto;padding:12px 18px;display:flex;gap:8px;align-items:center;overflow:auto}.brand{display:flex;gap:10px;align-items:center;font-weight:800;margin-right:auto;white-space:nowrap}.mark{height:30px;width:30px;border:1px solid var(--l);border-radius:9px;display:grid;place-items:center;color:var(--a);background:#091a2d}.navbtn,.filter{background:transparent;border:1px solid transparent;color:var(--m);padding:8px 10px;border-radius:9px;cursor:pointer;white-space:nowrap}.navbtn:hover,.navbtn.active,.filter.active,.filter:hover{color:var(--t);background:#102640;border-color:#315878}.wrap{max-width:1400px;margin:auto;padding:28px 18px 80px}.hero{display:grid;grid-template-columns:1.45fr .75fr;gap:18px}.card,.node{background:linear-gradient(180deg,#102238f5,#0a1929f5);border:1px solid #8fb0cc1b;border-radius:18px;box-shadow:0 18px 55px #0005}.heroCard{padding:34px}.eyebrow,.kicker{font-size:.75rem;letter-spacing:.11em;text-transform:uppercase;color:var(--a);font-weight:800}.hero h1{font-size:clamp(2.5rem,5.8vw,5.7rem);line-height:.9;letter-spacing:-.06em;margin:12px 0 18px}.hero p{color:var(--m);font-size:1.05rem;max-width:850px}.statement{padding:16px 18px;border-left:3px solid var(--a);background:#74d7ff08;border-radius:0 12px 12px 0;margin-top:22px;font-size:1.08rem}.pillrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}.pill,.chip{border:1px solid var(--l);background:#081728;border-radius:999px;padding:6px 9px;color:#bfd1e2;font-size:.82rem}.aside{padding:22px;display:flex;flex-direction:column;justify-content:space-between}.aside ul{padding-left:19px;color:var(--m);line-height:1.9}.section{margin-top:24px}.section h2{font-size:1.45rem;margin:0 0 10px}.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:9px}.node{padding:15px;cursor:pointer;transition:.18s transform,.18s border-color,.18s background}.node:hover{transform:translateY(-2px);border-color:#3d678a;background:#112942}.node.dim{opacity:.25}.node.hl{border-color:var(--a);box-shadow:0 0 0 1px #74d7ff22,0 0 30px #74d7ff0d}.icon{font-size:1.35rem;color:var(--a)}.node h3{font-size:1rem;margin:8px 0 5px}.node p{color:var(--m);font-size:.86rem;margin:0}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}.search{display:flex;gap:9px;margin-bottom:12px}.search input{width:100%;background:#081728;color:var(--t);border:1px solid var(--l);padding:11px 13px;border-radius:11px;outline:none}.toolbar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}.land{display:grid;grid-template-columns:1.25fr .75fr;gap:15px}.map{padding:18px}.mapgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.panel{padding:20px;min-height:620px}.rel{border:1px solid #8fb0cc18;background:#091828;padding:11px 12px;border-radius:11px;margin:7px 0}.rel strong{display:block}.rel span{display:block;color:var(--m);font-size:.84rem;margin-top:3px}.detail{display:grid;grid-template-columns:1.2fr .8fr;gap:15px}.detail>div{padding:23px}.detail h2{font-size:2rem;margin:5px 0 9px}.muted{color:var(--m)}.subgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:17px}.sub{padding:14px;background:#091728;border:1px solid #8fb0cc16;border-radius:13px}.sub h4{margin:0 0 8px}.chips{display:flex;flex-wrap:wrap;gap:6px}.scenarioGrid,.careerGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.scenario,.career{padding:18px}.scenario h3,.career h3{margin:5px 0 7px}.timeline{display:flex;flex-direction:column;gap:7px;margin-top:14px}.step{display:grid;grid-template-columns:175px 1fr;gap:10px;padding:11px 12px;border-left:2px solid #315878;background:#081828;border-radius:0 10px 10px 0}.step b{color:var(--a)}.step span{color:var(--m)}.sources{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.source{padding:14px;background:#091728;border:1px solid #8fb0cc16;border-radius:12px}.source strong{display:block;margin-bottom:4px}.source span{color:var(--m);font-size:.85rem}.note{padding:13px 15px;border:1px dashed #365b7d;background:#74d7ff06;border-radius:12px;color:#bfd1e2}.small{font-size:.83rem;color:var(--m)}.hidden{display:none!important}.footer{position:fixed;right:12px;bottom:9px;background:#06111fd8;border:1px solid #ffffff12;border-radius:9px;padding:6px 9px;color:#8ca8be;font-size:.76rem;z-index:20}.footer b{color:#d9e7f3}@media(max-width:1050px){.hero,.land,.detail{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:repeat(3,1fr)}.mapgrid{grid-template-columns:repeat(3,1fr)}}@media(max-width:700px){.brand span{display:none}.grid,.mapgrid,.scenarioGrid,.careerGrid,.sources,.subgrid,.flow{grid-template-columns:1fr}.step{grid-template-columns:1fr}.footer{position:static;margin:0 18px 16px;text-align:right}}
+
+.calmHero{padding:46px 8px 28px;text-align:center;max-width:1050px;margin:0 auto}
+.calmHero h1{font-size:clamp(3rem,7vw,7rem);line-height:.88;letter-spacing:-.06em;margin:12px 0 18px}
+.calmHero h1 span{color:#7dd3fc}
+.heroLead{max-width:720px;margin:0 auto;color:#9db0c5;font-size:1.08rem;line-height:1.6}
+.coreQuestion{max-width:700px;margin:25px auto 0;padding:18px 20px;border:1px solid rgba(125,211,252,.18);background:rgba(125,211,252,.045);border-radius:16px;text-align:left}
+.coreQuestion span{display:block;text-transform:uppercase;letter-spacing:.08em;font-size:.7rem;color:#7dd3fc;font-weight:750}
+.coreQuestion strong{display:block;margin-top:6px;font-size:1.05rem;line-height:1.45}
+.coreModel{margin-top:8px;padding:20px;border-radius:20px;border:1px solid rgba(133,166,195,.16);background:linear-gradient(180deg,rgba(14,29,47,.95),rgba(9,22,37,.95))}
+.modelIntro{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:18px}
+.modelIntro h2{margin:5px 0 0;font-size:1.6rem}
+.ghostBtn,.secondaryBtn{border:1px solid #2d4c68;background:#0a1727;color:#c6d7e6;padding:9px 12px;border-radius:10px;cursor:pointer}
+.ghostBtn:hover,.secondaryBtn:hover{border-color:#507a9d;color:#fff}
+.bigFlow{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.flowStep{position:relative;padding:17px 12px;border:1px solid rgba(133,166,195,.15);border-radius:14px;background:#0a192a;min-height:112px}
+.flowStep:not(:last-child)::after{content:"→";position:absolute;right:-9px;top:43px;color:#4a6b84;z-index:2}
+.flowStep b{display:block;font-size:.9rem}.flowStep p{margin:7px 0 0;color:#91a8bc;font-size:.77rem;line-height:1.45}
+.flowStep.accent{border-color:#315b79;background:rgba(125,211,252,.045)}
+.sectionHead{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin-bottom:13px}
+.sectionHead h2{margin:4px 0 0}
+.lensGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.lensCard{border:1px solid rgba(133,166,195,.16);background:#0a192a;color:#eaf2fb;border-radius:16px;padding:18px;text-align:left;cursor:pointer;transition:.18s}
+.lensCard:hover{transform:translateY(-2px);border-color:#456f91;background:#0e2035}
+.lensIcon{display:block;font-size:1.55rem;color:#7dd3fc;margin-bottom:17px}
+.lensCard b{display:block;font-size:1rem}.lensCard small{display:block;color:#93a9bd;line-height:1.45;margin-top:7px}
+.collapsedPanel{overflow:hidden;padding:0!important;border:1px solid rgba(133,166,195,.14);border-radius:16px;background:#091727}
+.expandHead{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;cursor:pointer}
+.expandHead h3{margin:5px 0 0;font-size:1.15rem}.expandIcon{font-size:1.45rem;color:#7dd3fc}
+.expandBody{display:none;padding:0 20px 20px;border-top:1px solid rgba(133,166,195,.11)}
+.collapsedPanel.open .expandBody{display:block}.collapsedPanel.open .expandIcon{transform:rotate(45deg)}
+.miniCards{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;padding-top:16px}
+.miniCard{padding:13px;border-radius:12px;background:#0b1b2d;border:1px solid rgba(133,166,195,.13);cursor:pointer}
+.miniCard b{display:block;font-size:.83rem}.miniCard span{display:block;color:#91a8bc;font-size:.75rem;line-height:1.4;margin-top:5px}
+.miniExplain{margin-top:13px;color:#93a9bd;font-size:.83rem;line-height:1.55}
+.capabilityRail{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;padding-top:16px}
+.cap{padding:14px;border-radius:12px;background:#0b1b2d;border:1px solid rgba(133,166,195,.13);min-height:115px}
+.cap b{display:block;font-size:.82rem}.cap p{margin:6px 0 0;color:#91a8bc;font-size:.75rem;line-height:1.4}
+.failureFlow{display:flex;align-items:stretch;gap:8px;padding-top:16px;overflow:auto}
+.failure{min-width:150px;padding:14px;border-radius:12px;background:#0b1b2d;border:1px solid rgba(133,166,195,.13)}
+.failure b{display:block;font-size:.8rem}.failure span{display:block;color:#91a8bc;font-size:.73rem;line-height:1.4;margin-top:5px}.failure .arrow{color:#52748f}
+.ctaCard{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px;border:1px solid rgba(125,211,252,.18);background:linear-gradient(90deg,rgba(125,211,252,.055),rgba(196,181,253,.035));border-radius:18px}
+.ctaCard h3{margin:5px 0}.ctaCard p{color:#93a9bd;margin:5px 0 0;line-height:1.5}.ctaBtns{display:flex;gap:9px;flex-wrap:wrap}
+.primaryBtn{border:1px solid #7dd3fc;background:#12304a;color:#eaf7ff;padding:10px 13px;border-radius:10px;cursor:pointer}.primaryBtn:hover{background:#173b5a}
+@media(max-width:1050px){.bigFlow{grid-template-columns:repeat(3,1fr)}.lensGrid{grid-template-columns:repeat(2,1fr)}.miniCards{grid-template-columns:repeat(2,1fr)}.capabilityRail{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.modelIntro,.sectionHead,.ctaCard{display:block}.modelIntro .ghostBtn{margin-top:12px}.bigFlow{grid-template-columns:1fr 1fr}.flowStep:not(:last-child)::after{display:none}.lensGrid,.miniCards,.capabilityRail{grid-template-columns:1fr}.ctaBtns{margin-top:14px}.failureFlow{flex-direction:column}}
+
+</style></head><body>
+<header class="top">
+  <nav class="nav">
+    <div class="brand"><div class="mark">◈</div><span>Information Security Panorama</span></div>
+    <button class="navbtn active" data-view="panorama">Panorama</button>
+    <button class="navbtn" data-view="explore">Explore</button>
+    <button class="navbtn" data-view="scenarios">Scenarios</button>
+    <button class="navbtn" data-view="careers">Careers</button>
+    <button class="navbtn" data-view="sources">References</button>
+  </nav>
+</header>
+
+<main class="wrap">
+<section id="view-panorama" class="view">
+  <div class="calmHero">
+    <div class="kicker">Release Level 1 · First principles</div>
+    <h1>Information Security<br><span>Panorama</span></h1>
+    <p class="heroLead">A simple way to see the whole security landscape before diving into the details.</p>
+    <div class="coreQuestion">
+      <span>Start with one question</span>
+      <strong>What are we protecting — and what can happen if protection fails?</strong>
+    </div>
+  </div>
+
+  <div class="coreModel">
+    <div class="modelIntro">
+      <div><div class="kicker">The big picture</div><h2>Security is a loop, not a list.</h2></div>
+      <button class="ghostBtn" id="showAllModel">Show the whole model</button>
+    </div>
+    <div class="bigFlow" id="bigFlow"></div>
+  </div>
+
+  <div class="section">
+    <div class="sectionHead">
+      <div><div class="kicker">Choose your lens</div><h2>Explore only what you want to see</h2></div>
+      <div class="small">Nothing below is expanded until you choose it.</div>
+    </div>
+    <div class="lensGrid">
+      <button class="lensCard" data-open="protect"><span class="lensIcon">◉</span><b>What are we protecting?</b><small>Assets, data, identities, devices, applications, cloud, OT and people.</small></button>
+      <button class="lensCard" data-open="threat"><span class="lensIcon">⚠</span><b>What can go wrong?</b><small>Threats, vulnerabilities, attacks, mistakes, insiders and dependency failures.</small></button>
+      <button class="lensCard" data-open="capabilities"><span class="lensIcon">⬡</span><b>How do we reduce the risk?</b><small>Governance, architecture, controls, engineering and security operations.</small></button>
+      <button class="lensCard" data-open="respond"><span class="lensIcon">↻</span><b>What happens when controls fail?</b><small>Detection, investigation, response, recovery and lessons learned.</small></button>
+    </div>
+  </div>
+
+  <div class="section collapsedPanel" id="protectPanel">
+    <div class="expandHead" data-target="protectPanel"><span><span class="kicker">Lens 01</span><h3>What are we protecting?</h3></span><span class="expandIcon">+</span></div>
+    <div class="expandBody">
+      <div class="miniCards" id="protectCards"></div>
+      <div class="miniExplain">Think of these as the environment security operates on. The categories overlap: an identity can access a cloud workload, an application can process data, and an OT device can sit on a network.</div>
+    </div>
+  </div>
+
+  <div class="section collapsedPanel" id="threatPanel">
+    <div class="expandHead" data-target="threatPanel"><span><span class="kicker">Lens 02</span><h3>What can go wrong?</h3></span><span class="expandIcon">+</span></div>
+    <div class="expandBody">
+      <div class="miniCards" id="threatCards"></div>
+      <div class="miniExplain">The same weakness can matter very differently depending on the asset, attacker capability and business impact.</div>
+    </div>
+  </div>
+
+  <div class="section collapsedPanel" id="capabilitiesPanel">
+    <div class="expandHead" data-target="capabilitiesPanel"><span><span class="kicker">Lens 03</span><h3>How do we reduce the risk?</h3></span><span class="expandIcon">+</span></div>
+    <div class="expandBody">
+      <div class="capabilityRail" id="capabilityRail"></div>
+    </div>
+  </div>
+
+  <div class="section collapsedPanel" id="respondPanel">
+    <div class="expandHead" data-target="respondPanel"><span><span class="kicker">Lens 04</span><h3>What happens when controls fail?</h3></span><span class="expandIcon">+</span></div>
+    <div class="expandBody">
+      <div class="failureFlow" id="failureFlow"></div>
+      <div class="miniExplain">This is where security operations, threat intelligence, incident response, forensics, recovery and assurance connect.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="ctaCard">
+      <div><div class="kicker">Next step</div><h3>Ready to go deeper?</h3><p>Explore a domain, follow a real-world scenario, or see how security work maps to roles.</p></div>
+      <div class="ctaBtns">
+        <button class="primaryBtn" data-view-go="explore">Explore the landscape</button>
+        <button class="secondaryBtn" data-view-go="scenarios">Follow an incident</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="view-explore" class="view hidden">
+  <div class="section" style="margin-top:0">
+    <div class="sectionHead">
+      <div><div class="kicker">Explore the landscape</div><h2>Click one domain at a time</h2></div>
+      <div class="small">Search is optional. Start anywhere.</div>
+    </div>
+    <div class="searchbar"><input id="search" placeholder="Search domains, capabilities, roles or technologies…"></div>
+    <div class="toolbar" id="filters"></div>
+    <div class="grid" id="domainGrid"></div>
+  </div>
+</section>
+
+<section id="view-scenarios" class="view hidden">
+  <div class="section" style="margin-top:0">
+    <div class="sectionHead"><div><div class="kicker">Security in action</div><h2>See the relationships through scenarios</h2></div></div>
+    <div class="scenarios" id="scenarioGrid"></div>
+    <div id="scenarioDetail" class="card scDetail hidden"></div>
+  </div>
+</section>
+
+<section id="view-careers" class="view hidden">
+  <div class="section" style="margin-top:0">
+    <div class="sectionHead"><div><div class="kicker">Career lens</div><h2>Where does the work happen?</h2></div></div>
+    <div class="careerGrid" id="careerGrid"></div>
+    <div class="note" style="margin-top:14px"><b>Remember:</b> real roles overlap. The same organization can place architecture, engineering, operations, risk and assurance responsibilities in different teams.</div>
+  </div>
+</section>
+
+<section id="view-sources" class="view hidden">
+  <div class="section" style="margin-top:0">
+    <div class="sectionHead"><div><div class="kicker">Reference layer</div><h2>Frameworks and standards behind the model</h2></div></div>
+    <p class="small">Release Level 1 is a synthesis for orientation and learning. It intentionally does not replace any framework, standard or control catalog.</p>
+    <div class="sources" id="sources"></div>
+  </div>
+</section>
+
+<section id="detail-view" class="view hidden">
+  <div class="detail">
+    <div class="card detailMain" id="detailMain"></div>
+    <div class="card detailSide" id="detailSide"></div>
+  </div>
+</section>
+</main>
+
+<div class="footer">Release Level 1 · <b>Mohammed. K. M. Pasha</b></div>
+</html>

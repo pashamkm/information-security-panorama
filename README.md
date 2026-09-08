@@ -1,2 +1,2 @@
 # infosec-enclave
-Understanding enterprise security through a gated community of 100 houses interactively
+Interactive visual exploration of information security through a gated community

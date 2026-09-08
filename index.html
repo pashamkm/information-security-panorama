@@ -1,183 +1,799 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Information Security Panorama — Release Level 1</title>
-<style>
-:root{--bg:#06111f;--p:#0d1b2d;--p2:#10243a;--t:#eaf2fb;--m:#9eb2c7;--l:#25445f;--a:#74d7ff;--g:#86efac;--w:#fcd34d;--r:#fb7185;--v:#c4b5fd}*{box-sizing:border-box}body{margin:0;background:radial-gradient(1000px 500px at 20% -10%,#0c2940,transparent 60%),radial-gradient(850px 500px at 100% 0,#211843,transparent 55%),var(--bg);color:var(--t);font:15px/1.45 Inter,system-ui,-apple-system,Segoe UI,sans-serif}a{color:var(--a)}button,input{font:inherit}.top{position:sticky;top:0;z-index:10;background:#06111fe8;border-bottom:1px solid #ffffff12;backdrop-filter:blur(14px)}nav{max-width:1400px;margin:auto;padding:12px 18px;display:flex;gap:8px;align-items:center;overflow:auto}.brand{display:flex;gap:10px;align-items:center;font-weight:800;margin-right:auto;white-space:nowrap}.mark{height:30px;width:30px;border:1px solid var(--l);border-radius:9px;display:grid;place-items:center;color:var(--a);background:#091a2d}.navbtn,.filter{background:transparent;border:1px solid transparent;color:var(--m);padding:8px 10px;border-radius:9px;cursor:pointer;white-space:nowrap}.navbtn:hover,.navbtn.active,.filter.active,.filter:hover{color:var(--t);background:#102640;border-color:#315878}.wrap{max-width:1400px;margin:auto;padding:28px 18px 80px}.hero{display:grid;grid-template-columns:1.45fr .75fr;gap:18px}.card,.node{background:linear-gradient(180deg,#102238f5,#0a1929f5);border:1px solid #8fb0cc1b;border-radius:18px;box-shadow:0 18px 55px #0005}.heroCard{padding:34px}.eyebrow,.kicker{font-size:.75rem;letter-spacing:.11em;text-transform:uppercase;color:var(--a);font-weight:800}.hero h1{font-size:clamp(2.5rem,5.8vw,5.7rem);line-height:.9;letter-spacing:-.06em;margin:12px 0 18px}.hero p{color:var(--m);font-size:1.05rem;max-width:850px}.statement{padding:16px 18px;border-left:3px solid var(--a);background:#74d7ff08;border-radius:0 12px 12px 0;margin-top:22px;font-size:1.08rem}.pillrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}.pill,.chip{border:1px solid var(--l);background:#081728;border-radius:999px;padding:6px 9px;color:#bfd1e2;font-size:.82rem}.aside{padding:22px;display:flex;flex-direction:column;justify-content:space-between}.aside ul{padding-left:19px;color:var(--m);line-height:1.9}.section{margin-top:24px}.section h2{font-size:1.45rem;margin:0 0 10px}.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:9px}.node{padding:15px;cursor:pointer;transition:.18s transform,.18s border-color,.18s background}.node:hover{transform:translateY(-2px);border-color:#3d678a;background:#112942}.node.dim{opacity:.25}.node.hl{border-color:var(--a);box-shadow:0 0 0 1px #74d7ff22,0 0 30px #74d7ff0d}.icon{font-size:1.35rem;color:var(--a)}.node h3{font-size:1rem;margin:8px 0 5px}.node p{color:var(--m);font-size:.86rem;margin:0}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}.search{display:flex;gap:9px;margin-bottom:12px}.search input{width:100%;background:#081728;color:var(--t);border:1px solid var(--l);padding:11px 13px;border-radius:11px;outline:none}.toolbar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}.land{display:grid;grid-template-columns:1.25fr .75fr;gap:15px}.map{padding:18px}.mapgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.panel{padding:20px;min-height:620px}.rel{border:1px solid #8fb0cc18;background:#091828;padding:11px 12px;border-radius:11px;margin:7px 0}.rel strong{display:block}.rel span{display:block;color:var(--m);font-size:.84rem;margin-top:3px}.detail{display:grid;grid-template-columns:1.2fr .8fr;gap:15px}.detail>div{padding:23px}.detail h2{font-size:2rem;margin:5px 0 9px}.muted{color:var(--m)}.subgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:17px}.sub{padding:14px;background:#091728;border:1px solid #8fb0cc16;border-radius:13px}.sub h4{margin:0 0 8px}.chips{display:flex;flex-wrap:wrap;gap:6px}.scenarioGrid,.careerGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.scenario,.career{padding:18px}.scenario h3,.career h3{margin:5px 0 7px}.timeline{display:flex;flex-direction:column;gap:7px;margin-top:14px}.step{display:grid;grid-template-columns:175px 1fr;gap:10px;padding:11px 12px;border-left:2px solid #315878;background:#081828;border-radius:0 10px 10px 0}.step b{color:var(--a)}.step span{color:var(--m)}.sources{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.source{padding:14px;background:#091728;border:1px solid #8fb0cc16;border-radius:12px}.source strong{display:block;margin-bottom:4px}.source span{color:var(--m);font-size:.85rem}.note{padding:13px 15px;border:1px dashed #365b7d;background:#74d7ff06;border-radius:12px;color:#bfd1e2}.small{font-size:.83rem;color:var(--m)}.hidden{display:none!important}.footer{position:fixed;right:12px;bottom:9px;background:#06111fd8;border:1px solid #ffffff12;border-radius:9px;padding:6px 9px;color:#8ca8be;font-size:.76rem;z-index:20}.footer b{color:#d9e7f3}@media(max-width:1050px){.hero,.land,.detail{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:repeat(3,1fr)}.mapgrid{grid-template-columns:repeat(3,1fr)}}@media(max-width:700px){.brand span{display:none}.grid,.mapgrid,.scenarioGrid,.careerGrid,.sources,.subgrid,.flow{grid-template-columns:1fr}.step{grid-template-columns:1fr}.footer{position:static;margin:0 18px 16px;text-align:right}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The InfoSec Enclave | The 100-House Security Masterplan</title>
+  <style>
+    :root {
+      --bg: #090e15;
+      --panel: #111a24;
+      --card: #182433;
+      --card-hover: #1f3044;
+      --border: #233448;
+      --accent: #10b981;
+      --accent-glow: rgba(16, 185, 129, 0.25);
+      --highlight: #38bdf8;
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
+    }
 
-.calmHero{padding:46px 8px 28px;text-align:center;max-width:1050px;margin:0 auto}
-.calmHero h1{font-size:clamp(3rem,7vw,7rem);line-height:.88;letter-spacing:-.06em;margin:12px 0 18px}
-.calmHero h1 span{color:#7dd3fc}
-.heroLead{max-width:720px;margin:0 auto;color:#9db0c5;font-size:1.08rem;line-height:1.6}
-.coreQuestion{max-width:700px;margin:25px auto 0;padding:18px 20px;border:1px solid rgba(125,211,252,.18);background:rgba(125,211,252,.045);border-radius:16px;text-align:left}
-.coreQuestion span{display:block;text-transform:uppercase;letter-spacing:.08em;font-size:.7rem;color:#7dd3fc;font-weight:750}
-.coreQuestion strong{display:block;margin-top:6px;font-size:1.05rem;line-height:1.45}
-.coreModel{margin-top:8px;padding:20px;border-radius:20px;border:1px solid rgba(133,166,195,.16);background:linear-gradient(180deg,rgba(14,29,47,.95),rgba(9,22,37,.95))}
-.modelIntro{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:18px}
-.modelIntro h2{margin:5px 0 0;font-size:1.6rem}
-.ghostBtn,.secondaryBtn{border:1px solid #2d4c68;background:#0a1727;color:#c6d7e6;padding:9px 12px;border-radius:10px;cursor:pointer}
-.ghostBtn:hover,.secondaryBtn:hover{border-color:#507a9d;color:#fff}
-.bigFlow{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
-.flowStep{position:relative;padding:17px 12px;border:1px solid rgba(133,166,195,.15);border-radius:14px;background:#0a192a;min-height:112px}
-.flowStep:not(:last-child)::after{content:"→";position:absolute;right:-9px;top:43px;color:#4a6b84;z-index:2}
-.flowStep b{display:block;font-size:.9rem}.flowStep p{margin:7px 0 0;color:#91a8bc;font-size:.77rem;line-height:1.45}
-.flowStep.accent{border-color:#315b79;background:rgba(125,211,252,.045)}
-.sectionHead{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin-bottom:13px}
-.sectionHead h2{margin:4px 0 0}
-.lensGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.lensCard{border:1px solid rgba(133,166,195,.16);background:#0a192a;color:#eaf2fb;border-radius:16px;padding:18px;text-align:left;cursor:pointer;transition:.18s}
-.lensCard:hover{transform:translateY(-2px);border-color:#456f91;background:#0e2035}
-.lensIcon{display:block;font-size:1.55rem;color:#7dd3fc;margin-bottom:17px}
-.lensCard b{display:block;font-size:1rem}.lensCard small{display:block;color:#93a9bd;line-height:1.45;margin-top:7px}
-.collapsedPanel{overflow:hidden;padding:0!important;border:1px solid rgba(133,166,195,.14);border-radius:16px;background:#091727}
-.expandHead{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;cursor:pointer}
-.expandHead h3{margin:5px 0 0;font-size:1.15rem}.expandIcon{font-size:1.45rem;color:#7dd3fc}
-.expandBody{display:none;padding:0 20px 20px;border-top:1px solid rgba(133,166,195,.11)}
-.collapsedPanel.open .expandBody{display:block}.collapsedPanel.open .expandIcon{transform:rotate(45deg)}
-.miniCards{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;padding-top:16px}
-.miniCard{padding:13px;border-radius:12px;background:#0b1b2d;border:1px solid rgba(133,166,195,.13);cursor:pointer}
-.miniCard b{display:block;font-size:.83rem}.miniCard span{display:block;color:#91a8bc;font-size:.75rem;line-height:1.4;margin-top:5px}
-.miniExplain{margin-top:13px;color:#93a9bd;font-size:.83rem;line-height:1.55}
-.capabilityRail{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;padding-top:16px}
-.cap{padding:14px;border-radius:12px;background:#0b1b2d;border:1px solid rgba(133,166,195,.13);min-height:115px}
-.cap b{display:block;font-size:.82rem}.cap p{margin:6px 0 0;color:#91a8bc;font-size:.75rem;line-height:1.4}
-.failureFlow{display:flex;align-items:stretch;gap:8px;padding-top:16px;overflow:auto}
-.failure{min-width:150px;padding:14px;border-radius:12px;background:#0b1b2d;border:1px solid rgba(133,166,195,.13)}
-.failure b{display:block;font-size:.8rem}.failure span{display:block;color:#91a8bc;font-size:.73rem;line-height:1.4;margin-top:5px}.failure .arrow{color:#52748f}
-.ctaCard{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px;border:1px solid rgba(125,211,252,.18);background:linear-gradient(90deg,rgba(125,211,252,.055),rgba(196,181,253,.035));border-radius:18px}
-.ctaCard h3{margin:5px 0}.ctaCard p{color:#93a9bd;margin:5px 0 0;line-height:1.5}.ctaBtns{display:flex;gap:9px;flex-wrap:wrap}
-.primaryBtn{border:1px solid #7dd3fc;background:#12304a;color:#eaf7ff;padding:10px 13px;border-radius:10px;cursor:pointer}.primaryBtn:hover{background:#173b5a}
-@media(max-width:1050px){.bigFlow{grid-template-columns:repeat(3,1fr)}.lensGrid{grid-template-columns:repeat(2,1fr)}.miniCards{grid-template-columns:repeat(2,1fr)}.capabilityRail{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:700px){.modelIntro,.sectionHead,.ctaCard{display:block}.modelIntro .ghostBtn{margin-top:12px}.bigFlow{grid-template-columns:1fr 1fr}.flowStep:not(:last-child)::after{display:none}.lensGrid,.miniCards,.capabilityRail{grid-template-columns:1fr}.ctaBtns{margin-top:14px}.failureFlow{flex-direction:column}}
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg); color: var(--text-main); min-height: 100vh; padding: 2rem 1rem 3.5rem; display: flex; flex-direction: column; align-items: center; position: relative; }
 
-</style></head><body>
-<header class="top">
-  <nav class="nav">
-    <div class="brand"><div class="mark">◈</div><span>Information Security Panorama</span></div>
-    <button class="navbtn active" data-view="panorama">Panorama</button>
-    <button class="navbtn" data-view="explore">Explore</button>
-    <button class="navbtn" data-view="scenarios">Scenarios</button>
-    <button class="navbtn" data-view="careers">Careers</button>
-    <button class="navbtn" data-view="sources">References</button>
-  </nav>
-</header>
+    .container { max-width: 980px; width: 100%; display: flex; flex-direction: column; gap: 1.75rem; }
 
-<main class="wrap">
-<section id="view-panorama" class="view">
-  <div class="calmHero">
-    <div class="kicker">Release Level 1 · First principles</div>
-    <h1>Information Security<br><span>Panorama</span></h1>
-    <p class="heroLead">A simple way to see the whole security landscape before diving into the details.</p>
-    <div class="coreQuestion">
-      <span>Start with one question</span>
-      <strong>What are we protecting — and what can happen if protection fails?</strong>
-    </div>
-  </div>
+    /* Top Center Header */
+    .app-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .app-title {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--highlight);
+      letter-spacing: -0.5px;
+    }
+    .app-subtitle {
+      font-size: 1rem;
+      color: var(--text-dim);
+      max-width: 720px;
+      line-height: 1.55;
+    }
 
-  <div class="coreModel">
-    <div class="modelIntro">
-      <div><div class="kicker">The big picture</div><h2>Security is a loop, not a list.</h2></div>
-      <button class="ghostBtn" id="showAllModel">Show the whole model</button>
-    </div>
-    <div class="bigFlow" id="bigFlow"></div>
-  </div>
+    /* How to Use Box (Top Center) */
+    .how-to-use-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      max-width: 840px;
+      width: 100%;
+      text-align: left;
+    }
+    .how-to-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .how-to-steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+    @media (min-width: 700px) {
+      .how-to-steps { grid-template-columns: repeat(3, 1fr); }
+    }
+    .how-step {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 0.9rem;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.45;
+    }
+    .how-step strong { color: #e2e8f0; display: block; margin-bottom: 0.2rem; font-size: 0.86rem; }
 
-  <div class="section">
-    <div class="sectionHead">
-      <div><div class="kicker">Choose your lens</div><h2>Explore only what you want to see</h2></div>
-      <div class="small">Nothing below is expanded until you choose it.</div>
-    </div>
-    <div class="lensGrid">
-      <button class="lensCard" data-open="protect"><span class="lensIcon">◉</span><b>What are we protecting?</b><small>Assets, data, identities, devices, applications, cloud, OT and people.</small></button>
-      <button class="lensCard" data-open="threat"><span class="lensIcon">⚠</span><b>What can go wrong?</b><small>Threats, vulnerabilities, attacks, mistakes, insiders and dependency failures.</small></button>
-      <button class="lensCard" data-open="capabilities"><span class="lensIcon">⬡</span><b>How do we reduce the risk?</b><small>Governance, architecture, controls, engineering and security operations.</small></button>
-      <button class="lensCard" data-open="respond"><span class="lensIcon">↻</span><b>What happens when controls fail?</b><small>Detection, investigation, response, recovery and lessons learned.</small></button>
-    </div>
-  </div>
+    /* Top Progress Bar (3 Steps) */
+    .stepper-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .step-tab {
+      padding: 0.95rem 0.75rem;
+      background: transparent;
+      border: none;
+      border-right: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+    .step-tab:last-child { border-right: none; }
+    .step-tab:hover { background: var(--card-hover); color: var(--text-main); }
+    .step-tab.active {
+      background: var(--card);
+      color: var(--highlight);
+      border-bottom: 2px solid var(--highlight);
+    }
+    .step-tab.completed { color: var(--accent); }
+    .tab-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--border);
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step-tab.active .tab-num { background: var(--highlight); color: #000; font-weight: 700; }
+    .step-tab.completed .tab-num { background: var(--accent); color: #000; font-weight: 700; }
 
-  <div class="section collapsedPanel" id="protectPanel">
-    <div class="expandHead" data-target="protectPanel"><span><span class="kicker">Lens 01</span><h3>What are we protecting?</h3></span><span class="expandIcon">+</span></div>
-    <div class="expandBody">
-      <div class="miniCards" id="protectCards"></div>
-      <div class="miniExplain">Think of these as the environment security operates on. The categories overlap: an identity can access a cloud workload, an application can process data, and an OT device can sit on a network.</div>
-    </div>
-  </div>
+    /* Section Views */
+    .section-view {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .section-view.active { display: flex; flex-direction: column; gap: 1.5rem; }
 
-  <div class="section collapsedPanel" id="threatPanel">
-    <div class="expandHead" data-target="threatPanel"><span><span class="kicker">Lens 02</span><h3>What can go wrong?</h3></span><span class="expandIcon">+</span></div>
-    <div class="expandBody">
-      <div class="miniCards" id="threatCards"></div>
-      <div class="miniExplain">The same weakness can matter very differently depending on the asset, attacker capability and business impact.</div>
-    </div>
-  </div>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-  <div class="section collapsedPanel" id="capabilitiesPanel">
-    <div class="expandHead" data-target="capabilitiesPanel"><span><span class="kicker">Lens 03</span><h3>How do we reduce the risk?</h3></span><span class="expandIcon">+</span></div>
-    <div class="expandBody">
-      <div class="capabilityRail" id="capabilityRail"></div>
-    </div>
-  </div>
+    /* Card Panels */
+    .content-panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.25rem;
+      position: relative;
+    }
 
-  <div class="section collapsedPanel" id="respondPanel">
-    <div class="expandHead" data-target="respondPanel"><span><span class="kicker">Lens 04</span><h3>What happens when controls fail?</h3></span><span class="expandIcon">+</span></div>
-    <div class="expandBody">
-      <div class="failureFlow" id="failureFlow"></div>
-      <div class="miniExplain">This is where security operations, threat intelligence, incident response, forensics, recovery and assurance connect.</div>
-    </div>
-  </div>
+    /* Step 1: Mental Model */
+    .hero-accent { border-left: 4px solid var(--accent); }
+    .quote-lead { font-size: 1.15rem; font-weight: 500; line-height: 1.65; color: #e2e8f0; margin-bottom: 1.25rem; }
+    .quote-body { font-size: 0.96rem; line-height: 1.7; color: var(--text-dim); margin-bottom: 1.5rem; }
+    
+    .model-explanation {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
 
-  <div class="section">
-    <div class="ctaCard">
-      <div><div class="kicker">Next step</div><h3>Ready to go deeper?</h3><p>Explore a domain, follow a real-world scenario, or see how security work maps to roles.</p></div>
-      <div class="ctaBtns">
-        <button class="primaryBtn" data-view-go="explore">Explore the landscape</button>
-        <button class="secondaryBtn" data-view-go="scenarios">Follow an incident</button>
+    /* Step 2: Enclave Lab */
+    .buzzwords-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .buzz-tag {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--highlight);
+      font-size: 0.82rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .buzz-tag:hover, .buzz-tag.active {
+      background: var(--highlight);
+      color: #000;
+      border-color: var(--highlight);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+      font-weight: 600;
+    }
+    .explorer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 800px) {
+      .explorer-grid { grid-template-columns: 320px 1fr; }
+    }
+    .map-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .community-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 5px;
+      width: 100%;
+      max-width: 250px;
+    }
+    .house { aspect-ratio: 1; background: #203144; border-radius: 3px; transition: all 0.3s ease; }
+    .house.lit { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); transform: scale(1.06); }
+    
+    .detail-domain { font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--accent); letter-spacing: 1px; }
+    .detail-title { font-size: 1.3rem; margin: 0.35rem 0 0.8rem; }
+    .detail-desc { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; }
+    .analogy-badge {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.45rem 0.85rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+    }
+
+    /* Step 3: Framework Lens */
+    .lens-header { margin-bottom: 1.25rem; }
+    .lens-btn-group { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .lens-btn {
+      background: var(--card); border: 1px solid var(--border); color: #cbd5e1;
+      padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .lens-btn:hover { border-color: var(--accent); }
+    .lens-btn.active { background: var(--accent); color: #000; font-weight: 600; border-color: var(--accent); }
+    .lens-display {
+      background: var(--card); border: 1px solid var(--border); padding: 1.5rem; border-radius: 8px; font-size: 0.94rem; line-height: 1.65;
+    }
+
+    /* Navigation Actions */
+    .nav-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+    .btn-action {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+    .btn-action:hover { border-color: var(--highlight); background: var(--card-hover); }
+    .btn-primary { background: var(--accent); color: #000; border-color: var(--accent); }
+    .btn-primary:hover { background: #0ea372; border-color: #0ea372; color: #000; }
+
+    /* Footer Attribution (Bottom-Right) */
+    footer.app-footer {
+      width: 100%;
+      max-width: 980px;
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .release-tag {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+    .author-badge {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+    }
+    .author-badge strong {
+      color: var(--highlight);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Top-Center Title & Instructions -->
+    <header class="app-header">
+      <h1 class="app-title">The InfoSec Enclave</h1>
+      <p class="app-subtitle">
+        Trying to understand information security all at once causes cognitive overload. This tool uses progressive disclosure to connect the dots gradually through a 100-house gated community.
+      </p>
+
+      <div class="how-to-use-card">
+        <div class="how-to-title">
+          <span>How to Use This App</span>
+        </div>
+        <div class="how-to-steps">
+          <div class="how-step">
+            <strong>1. Anchor to the Mental Model</strong>
+            Replace abstract terminology with an intuitive foundation: enterprise defense as a living 100-house estate.
+          </div>
+          <div class="how-step">
+            <strong>2. Decode One Domain at a Time</strong>
+            Explore buzzwords (IAM, SOC, AppSec) in the Enclave Decoder to see their neighborhood equivalents light up.
+          </div>
+          <div class="how-step">
+            <strong>3. Inspect the Frameworks</strong>
+            Examine formal industry standards (NIST CSF 2.0, ISO 27001, OWASP, Zero Trust) without drowning in jargon.
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </header>
 
-<section id="view-explore" class="view hidden">
-  <div class="section" style="margin-top:0">
-    <div class="sectionHead">
-      <div><div class="kicker">Explore the landscape</div><h2>Click one domain at a time</h2></div>
-      <div class="small">Search is optional. Start anywhere.</div>
-    </div>
-    <div class="searchbar"><input id="search" placeholder="Search domains, capabilities, roles or technologies…"></div>
-    <div class="toolbar" id="filters"></div>
-    <div class="grid" id="domainGrid"></div>
-  </div>
-</section>
+    <!-- Top Stepper Bar (3 Steps) -->
+    <nav class="stepper-bar">
+      <button class="step-tab active" id="tab-1" onclick="goToStep(1)">
+        <span class="tab-num">1</span>
+        <span>Mental Model</span>
+      </button>
+      <button class="step-tab" id="tab-2" onclick="goToStep(2)">
+        <span class="tab-num">2</span>
+        <span>Enclave Lab</span>
+      </button>
+      <button class="step-tab" id="tab-3" onclick="goToStep(3)">
+        <span class="tab-num">3</span>
+        <span>Framework Lens</span>
+      </button>
+    </nav>
 
-<section id="view-scenarios" class="view hidden">
-  <div class="section" style="margin-top:0">
-    <div class="sectionHead"><div><div class="kicker">Security in action</div><h2>See the relationships through scenarios</h2></div></div>
-    <div class="scenarios" id="scenarioGrid"></div>
-    <div id="scenarioDetail" class="card scDetail hidden"></div>
-  </div>
-</section>
+    <!-- STEP 1: THE MENTAL MODEL -->
+    <section class="section-view active" id="step-1">
+      <div class="content-panel hero-accent">
+        <div class="quote-lead">
+          "Can we understand the world of Information Security at a glance? Probably not. Trying to absorb every discipline at once doesn't bring clarity—it creates cognitive overload."
+        </div>
+        <div class="quote-body">
+          IAM, SOC, GRC, Cloud, AppSec, DFIR, OT, DevSecOps… our industry has exploded into an intimidating alphabet soup. When presented all at once, beginners see disjointed silos, and even seasoned practitioners can lose sight of the foundational architecture.<br><br>
+          Real understanding doesn't happen in a single glance. It happens <strong>gradually, by anchoring unfamiliar technical ideas to something we already understand intuitively.</strong>
+        </div>
+        <div class="model-explanation">
+          Picture an enterprise as a <strong>gated community of 100 houses</strong>. Every organization has perimeter gates, shared utility lines, property records, and human residents. By stepping into this neighborhood layer by layer, each tool and framework falls cleanly into place as a practical, commonsense duty required to build, govern, and defend a shared habitat.
+        </div>
+      </div>
+      <div class="nav-actions" style="justify-content: flex-end;">
+        <button class="btn-action btn-primary" onclick="goToStep(2)">
+          Enter the Enclave Lab ➔
+        </button>
+      </div>
+    </section>
 
-<section id="view-careers" class="view hidden">
-  <div class="section" style="margin-top:0">
-    <div class="sectionHead"><div><div class="kicker">Career lens</div><h2>Where does the work happen?</h2></div></div>
-    <div class="careerGrid" id="careerGrid"></div>
-    <div class="note" style="margin-top:14px"><b>Remember:</b> real roles overlap. The same organization can place architecture, engineering, operations, risk and assurance responsibilities in different teams.</div>
-  </div>
-</section>
+    <!-- STEP 2: THE ENCLAVE LAB -->
+    <section class="section-view" id="step-2">
+      <div class="content-panel">
+        <h2 style="font-size: 1.25rem; margin-bottom: 0.4rem;">Interactive Enclave Lab: The Enclave Decoder</h2>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 1.25rem;">
+          Select any discipline below to see where it lives in the 100-house territory and decode how it functions in neighborhood terms:
+        </p>
 
-<section id="view-sources" class="view hidden">
-  <div class="section" style="margin-top:0">
-    <div class="sectionHead"><div><div class="kicker">Reference layer</div><h2>Frameworks and standards behind the model</h2></div></div>
-    <p class="small">Release Level 1 is a synthesis for orientation and learning. It intentionally does not replace any framework, standard or control catalog.</p>
-    <div class="sources" id="sources"></div>
-  </div>
-</section>
+        <div class="buzzwords-box" id="tags"></div>
 
-<section id="detail-view" class="view hidden">
-  <div class="detail">
-    <div class="card detailMain" id="detailMain"></div>
-    <div class="card detailSide" id="detailSide"></div>
-  </div>
-</section>
-</main>
+        <div class="explorer-grid">
+          <div class="map-box">
+            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.75rem;">Enclave 100 Territory</div>
+            <div class="community-grid" id="grid"></div>
+            <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 1rem; text-align: center;">
+              Active zone illuminates on selection.
+            </p>
+          </div>
 
-<div class="footer">Release Level 1 · <b>Mohammed. K. M. Pasha</b></div>
+          <div style="display: flex; flex-direction: column; justify-content: center;">
+            <div class="detail-domain" id="outDomain">Domain</div>
+            <div class="detail-title" id="outTitle">Discipline</div>
+            <div class="detail-desc" id="outDesc">Description</div>
+            <div><span class="analogy-badge" id="outAnalogy">Community Analogy</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <button class="btn-action" onclick="goToStep(1)">⬅ Back: Mental Model</button>
+        <button class="btn-action btn-primary" onclick="goToStep(3)">
+          Inspect Framework Lens for this Domain ➔
+        </button>
+      </div>
+    </section>
+
+    <!-- STEP 3: THE DEEP-DIVE FRAMEWORK LENS -->
+    <section class="section-view" id="step-3">
+      <div class="content-panel">
+        <div class="lens-header">
+          <div class="detail-domain" id="lensDomainTag">Domain Architecture</div>
+          <h2 style="font-size: 1.3rem; margin: 0.3rem 0;" id="lensTitle">Domain Lens</h2>
+          <p style="font-size: 0.9rem; color: var(--text-dim);">
+            Select an industry standard, architecture pattern, or framework used by practitioners in this domain:
+          </p>
+        </div>
+
+        <div class="lens-btn-group" id="lensButtons"></div>
+        <div class="lens-display" id="lensContent"></div>
+      </div>
+
+      <div class="nav-actions">
+        <button class="btn-action" onclick="goToStep(2)">⬅ Back to Enclave Lab</button>
+        <button class="btn-action" onclick="goToStep(1)">↺ Restart Journey</button>
+      </div>
+    </section>
+
+    <!-- Bottom Footer -->
+    <footer class="app-footer">
+      <span class="release-tag">Release 0.1 • Work in Progress</span>
+      <div class="author-badge">
+        Designed & Developed by <strong>Mohammed. K. M. Pasha</strong>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    /* -------------------------------------------------------------
+       1. DATA DEFINITIONS
+    ------------------------------------------------------------- */
+    const domainData = [
+      {
+        term: "GRC & AI Gov",
+        domain: "CISSP Domain 1: Security & Risk Management",
+        title: "The Resident Welfare Association Boardroom",
+        houses: [91, 92, 93, 94, 95, 96, 97, 98, 99, 100],
+        analogy: "Society by-laws, risk vs. budget formulas & municipal audits",
+        desc: "Defines enforceable rules, balances maintenance budgets against flood/fire risks, and vets third-party service agencies before contracts are issued.",
+        lensName: "GRC & Risk Management Lens",
+        lenses: [
+          {
+            name: "NIST CSF 2.0",
+            title: "NIST CSF 2.0: The Enclave's Operational Survival Cycle",
+            desc: "Structured across 6 continuous functions: <strong>Govern</strong> (Bylaws), <strong>Identify</strong> (House inventory), <strong>Protect</strong> (Gates & RFID), <strong>Detect</strong> (CCTV), <strong>Respond</strong> (Lockdowns), and <strong>Recover</strong> (Backup power & rebuilding)."
+          },
+          {
+            name: "ISO/IEC 27001",
+            title: "ISO/IEC 27001: The Certified Security Management System (ISMS)",
+            desc: "A globally accredited audit standard. Proves to municipal regulators and insurers that the community follows disciplined, continually reviewed policies: formal risk registers and vendor vetting SOPs."
+          },
+          {
+            name: "SOC 2 Type II",
+            title: "SOC 2 Type II: Continuous Proof for High-Trust Residents",
+            desc: "Brings in an independent third-party auditor to verify that guards logged visitors and tested alarms continuously over a rigorous 6-month evaluation window."
+          },
+          {
+            name: "CIS Top 18",
+            title: "CIS Critical Controls: The Prioritized Handyman Checklist",
+            desc: "Avoids framework paralysis: Control 1: Know your assets. Control 2: Know who holds keys. Control 3: Fix rusted gate latches—focusing on practical hygiene before investing in high-end surveillance."
+          }
+        ]
+      },
+      {
+        term: "Asset & Data Privacy",
+        domain: "CISSP Domain 2: Asset Security",
+        title: "The Master Property Ledger & Safe Vault",
+        houses: [81, 82, 83, 84, 85, 86, 87, 88, 89, 90],
+        analogy: "Locking up resident bank accounts & shredding old visitor logs",
+        desc: "Classifying what information is public (noticeboards) versus private (resident bank forms), and ensuring outdated records are securely sanitized.",
+        lensName: "Asset & Privacy Architecture Lens",
+        lenses: [
+          {
+            name: "Data Classification",
+            title: "Data Classification: Public vs. Secret",
+            desc: "Sorting community assets into strict tiers: <strong>Public</strong> (event posters), <strong>Internal</strong> (plumbing schematics), <strong>Confidential</strong> (resident directory), and <strong>Restricted</strong> (master gate codes)."
+          },
+          {
+            name: "Retention & Disposal",
+            title: "Data Lifecycle: Retention & Secure Disposal",
+            desc: "Visitor logbooks cannot sit on the desk forever. Under modern data hygiene, paper logs are shredded after 30 days and digital CCTV reels are securely overwritten to protect privacy."
+          },
+          {
+            name: "Privacy (GDPR/DPDP)",
+            title: "Privacy Laws: Purpose Limitation & Consent",
+            desc: "The society cannot take photos of residents entering the gate and sell that data to nearby malls. Data collected for safety (CCTV) cannot be repurposed without consent."
+          },
+          {
+            name: "Data Loss Prevention (DLP)",
+            title: "DLP: The Guard Bag-Check at the Exit",
+            desc: "Ensures departing contractors do not walk out carrying community master blueprints or sensitive resident files."
+          }
+        ]
+      },
+      {
+        term: "Cloud & OT Security",
+        domain: "CISSP Domain 3: Security Architecture & Engineering",
+        title: "Water Reservoirs, Power Substation & Off-site Storage",
+        houses: [71, 72, 73, 74, 75, 76, 77, 78, 79, 80],
+        analogy: "Off-site rental lockers (Cloud) and water/power pumps (OT)",
+        desc: "Securing shared physical utilities that keep homes running (OT/ICS) and managing community services hosted outside the enclave walls (Cloud).",
+        lensName: "Architecture & Engineering Lens",
+        lenses: [
+          {
+            name: "Zero Trust (ZTA)",
+            title: "Zero Trust: Never Trust, Always Verify",
+            desc: "Being physically inside the community perimeter does not grant automatic access to any villa. Every door and utility room requires independent verification."
+          },
+          {
+            name: "Shared Responsibility",
+            title: "Shared Responsibility: On-Prem vs Cloud Storage",
+            desc: "If the society rents an off-site commercial storage locker (Cloud), the provider guards the warehouse perimeter, but the society remains 100% responsible for who holds the padlock keys."
+          },
+          {
+            name: "OT / Purdue Model",
+            title: "OT/ICS Security: Isolating the Utility Grid",
+            desc: "Water booster pumps and high-voltage electrical transformers must never be connected directly to the open resident Wi-Fi. An air-gap or strict industrial firewall isolates vital physical systems."
+          },
+          {
+            name: "Defense in Depth",
+            title: "Defense in Depth: Concentric Rings of Protection",
+            desc: "Outer perimeter wall $\rightarrow$ boom barrier $\rightarrow$ street gate $\rightarrow$ front deadbolt $\rightarrow$ bedroom safe. If any single layer fails, the next layer prevents total compromise."
+          }
+        ]
+      },
+      {
+        term: "Network & Comms",
+        domain: "CISSP Domain 4: Communication & Network Security",
+        title: "Conduits, Roads & Intercom Cabling",
+        houses: [61, 62, 63, 64, 65, 66, 67, 68, 69, 70],
+        analogy: "Dedicated delivery lanes & shielded intercom wires",
+        desc: "Preventing traffic jams on shared avenues and stopping unauthorized listeners from tapping into private resident communications.",
+        lensName: "Network & Communications Lens",
+        lenses: [
+          {
+            name: "Micro-segmentation",
+            title: "Micro-segmentation: Isolated Service Lanes",
+            desc: "Heavy supply trucks, guest taxis, and resident cars do not share one narrow path. Traffic is separated into virtual lanes (VLANs) so a stalled delivery van cannot block emergency ambulances."
+          },
+          {
+            name: "Encryption (TLS/VPN)",
+            title: "Encrypted Pipelines: Shielded Intercom Tubing",
+            desc: "Intercom wires are encased in armored, cryptographically sealed conduits. Even if someone splices an audio jack into the wire, they hear only scrambled noise instead of private conversations."
+          },
+          {
+            name: "DDoS Mitigation",
+            title: "DDoS Defense: Anti-Tailgating Roundabouts",
+            desc: "When 10,000 automated delivery bots try to swarm the front gate simultaneously to overwhelm the guards, an automated buffer queue diverts traffic to prevent legitimate residents from being locked out."
+          },
+          {
+            name: "Firewalls & Proxies",
+            title: "Inspection Checkpoints: The Security Guard Hut",
+            desc: "Inspects incoming parcels and passenger manifests against allowlists and blocklists before vehicles are permitted past the outer gate."
+          }
+        ]
+      },
+      {
+        term: "IAM",
+        domain: "CISSP Domain 5: Identity & Access Management",
+        title: "The Guardhouse & Resident Keycards",
+        houses: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        analogy: "Guardhouse boom barriers, biometrics & resident keycards",
+        desc: "Proves who you are (Authentication) and ensures your pass only unlocks your assigned villa, not all 100 homes (Least Privilege).",
+        lensName: "Identity & Access Lens",
+        lenses: [
+          {
+            name: "Least Privilege (PoLP)",
+            title: "Least Privilege: Scoped Access Cards",
+            desc: "The swimming pool cleaner's keycard opens the chemical storage shed and nothing else. They cannot access villa master bedrooms or the electrical transformer room."
+          },
+          {
+            name: "Multi-Factor Auth (MFA)",
+            title: "MFA: Keycard + Intercom Confirmation",
+            desc: "Something you have (keycard) combined with something you are (biometric fingerprint) or something you know (PIN). Breaching a single factor is not enough to pass the gate."
+          },
+          {
+            name: "Privileged Access (PAM)",
+            title: "PAM: The Dual-Custody Master Key Cabinet",
+            desc: "The master key that unlocks all infrastructure valves is kept inside a dual-key safe requiring both the Society President and Chief Warden to sign a ledger and check it out for a strictly timed 2-hour window."
+          },
+          {
+            name: "Role-Based Access (RBAC)",
+            title: "RBAC: Uniform Badge Clearances",
+            desc: "Access is tied to the role, not the individual. Any guard hired on shift receives 'Guard Clearance Level 2'; when they leave the job, their clearance is instantly revoked."
+          }
+        ]
+      },
+      {
+        term: "Penetration Testing",
+        domain: "CISSP Domain 6: Security Assessment & Testing",
+        title: "The Ethical Red Team & Fire Drills",
+        houses: [31, 32, 33, 34, 35, 36, 37, 38, 39, 40],
+        analogy: "Hired ethical lockpickers testing the perimeter fences",
+        desc: "Deliberately testing whether an auditor can jump the rear wall or bypass a guard undetected, proving where defenses fail before adversaries arrive.",
+        lensName: "Assessment & Testing Lens",
+        lenses: [
+          {
+            name: "Red vs Blue Team",
+            title: "Red Team Drills: Attacker vs Defender Exercises",
+            desc: "The society hires an external specialist (Red Team) to disguise themselves as a plumber and attempt entry, testing if gate guards (Blue Team) spot the forged credentials."
+          },
+          {
+            name: "Vulnerability Scans",
+            title: "CVSS Severity: Scoring Fence Defects",
+            desc: "A broken deadbolt on a back door is a CVSS 9.8 (Critical—immediate breach risk); a faded lane number sign is a CVSS 2.0 (Low). Repairs are prioritized by risk score."
+          },
+          {
+            name: "STRIDE Threat Model",
+            title: "STRIDE: Systematic Hazard Brainstorming",
+            desc: "Before building a new automated gate, engineers evaluate: Can someone <strong>Spoof</strong> an RFID card? <strong>Tamper</strong> with the wire? <strong>Repudiate</strong> having entered? Steal <strong>Information</strong>? Crash it (<strong>Denial of Service</strong>)? Or gain <strong>Elevation of Privilege</strong>?"
+          },
+          {
+            name: "Disaster Drills",
+            title: "Tabletop Simulations: Power Grid Collapse",
+            desc: "Practicing what the community will do if the electrical substation catches fire at 2 AM on a stormy night, verifying that backup generators start in under 60 seconds."
+          }
+        ]
+      },
+      {
+        term: "SOC & DFIR",
+        domain: "CISSP Domain 7: Security Operations",
+        title: "The 24/7 CCTV Control Room & CSI Patrol",
+        houses: [41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
+        analogy: "Central monitoring wall, alarm triage & incident evidence bags",
+        desc: "Correlates tripped sensors across lanes at 2 AM, dispatches response guards to isolate breaches, and preserves logs for forensic investigations.",
+        lensName: "SecOps & Incident Response Lens",
+        lenses: [
+          {
+            name: "SIEM Correlation",
+            title: "SIEM: Connecting the Dots in Real Time",
+            desc: "A dog barking is noise. A sensor beeping at Gate 3 is noise. But Gate 3 beeping + motion sensor tripping at House #12 two minutes later = an orchestrated break-in alarm."
+          },
+          {
+            name: "PICERL Incident Steps",
+            title: "PICERL: The 6-Step Breach Playbook",
+            desc: "<strong>Preparation</strong> (flashlights ready), <strong>Identification</strong> (spotting the intruder), <strong>Containment</strong> (locking the lane gates), <strong>Eradication</strong> (removing the threat), <strong>Recovery</strong> (repairing locks), and <strong>Lessons Learned</strong>."
+          },
+          {
+            name: "DFIR Forensics",
+            title: "Forensics: Preserving Evidence & Chain of Custody",
+            desc: "Securing the crime scene without stepping on footprints. In digital terms: taking bit-by-bit hard drive snapshots and hashing video footage so evidence is legally admissible in court."
+          },
+          {
+            name: "Threat Hunting",
+            title: "Proactive Hunting: Patrolling the Dark Alleys",
+            desc: "Guards don't just sit waiting for sirens. Threat hunting involves actively inspecting shadows, hidden crawlspaces, and service tunnels where stealthy intruders may already be lurking silently."
+          }
+        ]
+      },
+      {
+        term: "AppSec & DevSecOps",
+        domain: "CISSP Domain 8: Software Development Security",
+        title: "The Resident Mobile App & Parcel Chutes",
+        houses: [11, 12, 13, 14, 15, 21, 22, 23, 24, 25],
+        analogy: "The automated gate kiosk & visitor check-in software",
+        desc: "Building self-service visitor kiosks and payment apps that reject tamper attempts (like SQL injection or code exploit) before they can unlock gates.",
+        lensName: "Application Security Lens",
+        lenses: [
+          {
+            name: "OWASP Top 10",
+            title: "OWASP Top 10: Common Software Flaws",
+            desc: "The universal catalogue of coding mistakes: Input Injection, Broken Authentication, Sensitive Data Exposure, and Security Misconfigurations that allow attackers to bypass software logic."
+          },
+          {
+            name: "Input Validation",
+            title: "Sanitizing Input: The Parcel Chute Sizer",
+            desc: "If a visitor types `' OR '1'='1` into the gate tablet, the system treats it strictly as a plain text name string, neutralizing the attempt to trick the database into unlocking every gate."
+          },
+          {
+            name: "Shift-Left / CI/CD",
+            title: "Shift-Left: Inspecting Blueprints Early",
+            desc: "Testing software for security vulnerabilities during design and coding, rather than trying to patch security flaws after the application is already running in production."
+          },
+          {
+            name: "SAST & DAST",
+            title: "SAST & DAST: Static & Dynamic Inspections",
+            desc: "Reading blueprints line-by-line before construction (Static Analysis) and aggressively rattling the completed door handle with automated tools once installed (Dynamic Analysis)."
+          }
+        ]
+      }
+    ];
+
+    /* -------------------------------------------------------------
+       2. STEP NAVIGATION CONTROLLER
+    ------------------------------------------------------------- */
+    let currentStep = 1;
+    let selectedDomain = domainData[0];
+
+    function goToStep(stepNumber) {
+      currentStep = stepNumber;
+
+      // Update Top Tabs
+      for (let i = 1; i <= 3; i++) {
+        const tab = document.getElementById(`tab-${i}`);
+        tab.classList.remove('active');
+        if (i < currentStep) tab.classList.add('completed');
+        else tab.classList.remove('completed');
+      }
+      document.getElementById(`tab-${stepNumber}`).classList.add('active');
+
+      // Show Current View
+      document.querySelectorAll('.section-view').forEach(view => view.classList.remove('active'));
+      document.getElementById(`step-${stepNumber}`).classList.add('active');
+
+      // Scroll smoothly to the stepper bar
+      document.querySelector('.stepper-bar').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    /* -------------------------------------------------------------
+       3. INITIALIZATION: LAB & LENS
+    ------------------------------------------------------------- */
+    // Build 100 Houses
+    const grid = document.getElementById('grid');
+    for (let i = 1; i <= 100; i++) {
+      const h = document.createElement('div');
+      h.className = 'house';
+      h.id = `house-${i}`;
+      grid.appendChild(h);
+    }
+
+    // Build Buzzword Tags
+    const tagsContainer = document.getElementById('tags');
+    domainData.forEach((item, index) => {
+      const tag = document.createElement('button');
+      tag.className = `buzz-tag ${index === 0 ? 'active' : ''}`;
+      tag.innerText = item.term;
+      tag.onclick = () => selectDomain(item, tag);
+      tagsContainer.appendChild(tag);
+    });
+
+    function selectDomain(item, el) {
+      selectedDomain = item;
+      document.querySelectorAll('.buzz-tag').forEach(t => t.classList.remove('active'));
+      if (el) el.classList.add('active');
+
+      // Update Decoder Lab Panel
+      document.getElementById('outDomain').innerText = item.domain;
+      document.getElementById('outTitle').innerText = `${item.term} ➔ ${item.title}`;
+      document.getElementById('outDesc').innerText = item.desc;
+      document.getElementById('outAnalogy').innerText = `Community Analogy: ${item.analogy}`;
+
+      // Update Map Grid
+      document.querySelectorAll('.house').forEach(h => h.classList.remove('lit'));
+      item.houses.forEach(id => {
+        const dot = document.getElementById(`house-${id}`);
+        if (dot) dot.classList.add('lit');
+      });
+
+      // Synchronize Step 3 (Framework Lens)
+      syncFrameworkLens(item);
+    }
+
+    function syncFrameworkLens(item) {
+      document.getElementById('lensDomainTag').innerText = item.domain;
+      document.getElementById('lensTitle').innerText = item.lensName;
+      
+      const btnContainer = document.getElementById('lensButtons');
+      btnContainer.innerHTML = '';
+
+      item.lenses.forEach((lens, index) => {
+        const btn = document.createElement('button');
+        btn.className = `lens-btn ${index === 0 ? 'active' : ''}`;
+        btn.innerText = lens.name;
+        btn.onclick = () => showLensDetail(lens, btn);
+        btnContainer.appendChild(btn);
+      });
+
+      showLensDetail(item.lenses[0], btnContainer.firstChild);
+    }
+
+    function showLensDetail(lens, btn) {
+      document.querySelectorAll('.lens-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      document.getElementById('lensContent').innerHTML = `
+        <strong style="color:var(--highlight); font-size:1.05rem; display:block; margin-bottom:0.5rem;">${lens.title}</strong>
+        <p style="color:var(--text-dim);">${lens.desc}</p>
+      `;
+    }
+
+    // Default Initialization
+    selectDomain(domainData[0], document.querySelector('.buzz-tag'));
+  </script>
+</body>
 </html>

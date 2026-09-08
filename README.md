@@ -1,2 +1,2 @@
-# information-security-panorama
-An interactive visual exploration of the Information Security landscape, relationships, threats, capabilities and security careers.
+# infosec-enclave
+Understanding enterprise security through a gated community of 100 houses

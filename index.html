@@ -14,6 +14,9 @@
       --accent: #10b981;
       --accent-glow: rgba(16, 185, 129, 0.25);
       --highlight: #38bdf8;
+      --amber: #f59e0b;
+      --purple: #a855f7;
+      --danger: #ef4444;
       --text-main: #f8fafc;
       --text-dim: #94a3b8;
     }
@@ -233,7 +236,7 @@
       color: #cbd5e1;
     }
 
-    /* Step 3: Framework Lens */
+    /* Step 3: Framework Lens Two-Column Layout */
     .lens-header { margin-bottom: 1.25rem; }
     .lens-btn-group { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
     .lens-btn {
@@ -243,8 +246,93 @@
     }
     .lens-btn:hover { border-color: var(--accent); }
     .lens-btn.active { background: var(--accent); color: #000; font-weight: 600; border-color: var(--accent); }
-    .lens-display {
-      background: var(--card); border: 1px solid var(--border); padding: 1.5rem; border-radius: 8px; font-size: 0.94rem; line-height: 1.65;
+    
+    .lens-content-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+    @media (min-width: 780px) {
+      .lens-content-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+    }
+
+    .lens-text-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+    /* Unified Enclave-Framework Dual Canvas */
+    .lens-diagram-col {
+      background: #080e16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 230px;
+      position: relative;
+    }
+    .schematic-box {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .layer-card {
+      background: #111b27;
+      border: 1px solid #23354b;
+      border-radius: 6px;
+      padding: 0.55rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .layer-header {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .layer-title {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .layer-detail {
+      font-size: 0.74rem;
+      color: var(--text-dim);
+    }
+    .layer-divider {
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--highlight);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .schematic-caption {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: var(--text-dim);
+      margin-top: 0.85rem;
+      text-align: center;
+      width: 100%;
+      border-top: 1px dashed #203144;
+      padding-top: 0.5rem;
     }
 
     /* Navigation Actions */
@@ -328,8 +416,8 @@
             Explore buzzwords (IAM, SOC, AppSec) in the Enclave Decoder to see their neighborhood equivalents light up.
           </div>
           <div class="how-step">
-            <strong>3. Inspect the Frameworks</strong>
-            Examine formal industry standards (NIST CSF 2.0, ISO 27001, OWASP, Zero Trust) without drowning in jargon.
+            <strong>3. Inspect Frameworks & Diagrams</strong>
+            Examine formal industry standards (NIST CSF, ISO, OWASP, Zero Trust) with consistent Enclave-to-Domain schematics.
           </div>
         </div>
       </div>
@@ -415,12 +503,17 @@
           <div class="detail-domain" id="lensDomainTag">Domain Architecture</div>
           <h2 style="font-size: 1.3rem; margin: 0.3rem 0;" id="lensTitle">Domain Lens</h2>
           <p style="font-size: 0.9rem; color: var(--text-dim);">
-            Select an industry standard, architecture pattern, or framework used by practitioners in this domain:
+            Select an industry standard or architecture model to inspect its technical details and Enclave schematic:
           </p>
         </div>
 
         <div class="lens-btn-group" id="lensButtons"></div>
-        <div class="lens-display" id="lensContent"></div>
+
+        <!-- 2-Column Lens: Text + Consistent Dual-Layer Enclave Schematic -->
+        <div class="lens-content-grid">
+          <div class="lens-text-col" id="lensContentText"></div>
+          <div class="lens-diagram-col" id="lensContentDiagram"></div>
+        </div>
       </div>
 
       <div class="nav-actions">
@@ -441,7 +534,7 @@
 
   <script>
     /* -------------------------------------------------------------
-       1. DATA DEFINITIONS
+       1. DATA: CONSISTENT ENCLAVE ↔ DOMAIN DUAL SCHEMATICS
     ------------------------------------------------------------- */
     const domainData = [
       {
@@ -456,22 +549,86 @@
           {
             name: "NIST CSF 2.0",
             title: "NIST CSF 2.0: The Enclave's Operational Survival Cycle",
-            desc: "Structured across 6 continuous functions: <strong>Govern</strong> (Bylaws), <strong>Identify</strong> (House inventory), <strong>Protect</strong> (Gates & RFID), <strong>Detect</strong> (CCTV), <strong>Respond</strong> (Lockdowns), and <strong>Recover</strong> (Backup power & rebuilding)."
+            desc: "Structured across 6 continuous functions: <strong>Govern</strong> (Bylaws), <strong>Identify</strong> (House inventory), <strong>Protect</strong> (Gates & RFID), <strong>Detect</strong> (CCTV), <strong>Respond</strong> (Lockdowns), and <strong>Recover</strong> (Backup power & rebuilding).",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Houses #91-100</span></div>
+                  <div class="layer-title">RWA Bylaws & Physical Disaster Protocol</div>
+                  <div class="layer-detail">Asset mapping ➔ Perimeter latches ➔ Siren alarm ➔ Fire recovery</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--purple);">
+                  <div class="layer-header"><span style="color:var(--purple);">CISSP D1: Security & Risk</span><span>NIST CSF 2.0</span></div>
+                  <div class="layer-title">Govern ➔ Identify ➔ Protect ➔ Detect ➔ Respond ➔ Recover</div>
+                  <div class="layer-detail">Holistic survival lifecycle governing people, process, and tech</div>
+                </div>
+              </div>
+              <div class="schematic-caption">NIST CSF 2.0 ↔ Enclave Governance Mapping</div>
+            `
           },
           {
             name: "ISO/IEC 27001",
-            title: "ISO/IEC 27001: The Certified Security Management System (ISMS)",
-            desc: "A globally accredited audit standard. Proves to municipal regulators and insurers that the community follows disciplined, continually reviewed policies: formal risk registers and vendor vetting SOPs."
+            title: "ISO/IEC 27001: The Certified ISMS Plan-Do-Check-Act",
+            desc: "A globally accredited audit standard. Proves to municipal regulators and insurers that the community follows disciplined, continually reviewed policies: formal risk registers, statement of applicability, and vendor vetting SOPs.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Society Board</span></div>
+                  <div class="layer-title">Annual Municipal Safety Certification</div>
+                  <div class="layer-detail">Draft bylaws ➔ Execute guard patrols ➔ Audit ledger ➔ Patch gaps</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--purple);">
+                  <div class="layer-header"><span style="color:var(--purple);">CISSP D1: Security & Risk</span><span>ISO/IEC 27001</span></div>
+                  <div class="layer-title">Plan-Do-Check-Act (PDCA) Management Engine</div>
+                  <div class="layer-detail">Formal ISMS, Annex A controls, and continuous compliance audits</div>
+                </div>
+              </div>
+              <div class="schematic-caption">ISO 27001 ISMS ↔ Enclave RWA Audit</div>
+            `
           },
           {
             name: "SOC 2 Type II",
             title: "SOC 2 Type II: Continuous Proof for High-Trust Residents",
-            desc: "Brings in an independent third-party auditor to verify that guards logged visitors and tested alarms continuously over a rigorous 6-month evaluation window."
+            desc: "Brings in an independent third-party auditor to verify that guards logged visitors and tested alarms continuously over a rigorous 6-month evaluation window, measuring Security, Availability, and Confidentiality.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Guard Desk</span></div>
+                  <div class="layer-title">6 Months of Tamper-Proof Guard Check-In Sheets</div>
+                  <div class="layer-detail">Proof to VIP homeowners that guards tested alarms every shift</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--purple);">
+                  <div class="layer-header"><span style="color:var(--purple);">CISSP D1: Security & Risk</span><span>AICPA Trust Criteria</span></div>
+                  <div class="layer-title">SOC 2 Type II Attestation of Operating Effectiveness</div>
+                  <div class="layer-detail">Testing security, availability, and confidentiality across time</div>
+                </div>
+              </div>
+              <div class="schematic-caption">SOC 2 Type II ↔ Enclave Continuous Attestation</div>
+            `
           },
           {
             name: "CIS Top 18",
             title: "CIS Critical Controls: The Prioritized Handyman Checklist",
-            desc: "Avoids framework paralysis: Control 1: Know your assets. Control 2: Know who holds keys. Control 3: Fix rusted gate latches—focusing on practical hygiene before investing in high-end surveillance."
+            desc: "Avoids framework paralysis: Control 1: Know your assets. Control 2: Know who holds keys. Control 3: Fix rusted gate latches—focusing on practical hygiene before investing in high-end surveillance.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Handyman Desk</span></div>
+                  <div class="layer-title">Step 1: Count Doors ➔ Step 2: Replace Broken Latches</div>
+                  <div class="layer-detail">Hygiene first: fixing perimeter holes before installing AI cameras</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--purple);">
+                  <div class="layer-header"><span style="color:var(--purple);">CISSP D1: Security & Risk</span><span>CIS Controls</span></div>
+                  <div class="layer-title">Implementation Group 1 (IG1) Foundational Hygiene</div>
+                  <div class="layer-detail">Hardware inventory, software allowlisting, and patch management</div>
+                </div>
+              </div>
+              <div class="schematic-caption">CIS Critical Hygiene ↔ Enclave Baseline Maintenance</div>
+            `
           }
         ]
       },
@@ -487,22 +644,86 @@
           {
             name: "Data Classification",
             title: "Data Classification: Public vs. Secret",
-            desc: "Sorting community assets into strict tiers: <strong>Public</strong> (event posters), <strong>Internal</strong> (plumbing schematics), <strong>Confidential</strong> (resident directory), and <strong>Restricted</strong> (master gate codes)."
+            desc: "Sorting community assets into strict tiers: <strong>Public</strong> (event posters), <strong>Internal</strong> (plumbing schematics), <strong>Confidential</strong> (resident directory), and <strong>Restricted</strong> (master gate codes).",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Houses #81-90</span></div>
+                  <div class="layer-title">Noticeboard ➔ Maintenance Files ➔ Resident Vault</div>
+                  <div class="layer-detail">Sorting open flyers from private homeowner identity files</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--accent);">
+                  <div class="layer-header"><span style="color:var(--accent);">CISSP D2: Asset Security</span><span>Classification Tier</span></div>
+                  <div class="layer-title">Public ➔ Internal ➔ Confidential ➔ Restricted</div>
+                  <div class="layer-detail">Handling labels, encryption levels, and access boundaries per tier</div>
+                </div>
+              </div>
+              <div class="schematic-caption">Classification Ladder ↔ Enclave Property Records</div>
+            `
           },
           {
             name: "Retention & Disposal",
             title: "Data Lifecycle: Retention & Secure Disposal",
-            desc: "Visitor logbooks cannot sit on the desk forever. Under modern data hygiene, paper logs are shredded after 30 days and digital CCTV reels are securely overwritten to protect privacy."
+            desc: "Visitor logbooks cannot sit on the desk forever. Under modern data hygiene, paper logs are shredded after 30 days and digital CCTV reels are securely overwritten to protect privacy.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Security Shed</span></div>
+                  <div class="layer-title">Old Paper Visitor Registers Shipped to Incinerator</div>
+                  <div class="layer-detail">Overwriting 30-day-old gate tapes to stop resident profiling</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--accent);">
+                  <div class="layer-header"><span style="color:var(--accent);">CISSP D2: Asset Security</span><span>Data Sanitization</span></div>
+                  <div class="layer-title">Retention Policy ➔ Cryptographic Erasure / Degaussing</div>
+                  <div class="layer-detail">NIST SP 800-88: Clear, Purge, and Destroy sanitization SOPs</div>
+                </div>
+              </div>
+              <div class="schematic-caption">Data Lifecycle ↔ Enclave Log Sanitization</div>
+            `
           },
           {
             name: "Privacy (GDPR/DPDP)",
             title: "Privacy Laws: Purpose Limitation & Consent",
-            desc: "The society cannot take photos of residents entering the gate and sell that data to nearby malls. Data collected for safety (CCTV) cannot be repurposed without consent."
+            desc: "The society cannot take photos of residents entering the gate and sell that data to nearby malls. Data collected for safety (CCTV) cannot be repurposed without consent.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Enclave Gates</span></div>
+                  <div class="layer-title">CCTV Installed Solely for Perimeter Intrusion Defense</div>
+                  <div class="layer-detail">Strict ban on selling resident movement logs to commercial vendors</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--accent);">
+                  <div class="layer-header"><span style="color:var(--accent);">CISSP D2: Asset Security</span><span>Privacy Mandates</span></div>
+                  <div class="layer-title">Purpose Limitation, Data Minimization & Consent</div>
+                  <div class="layer-detail">Strict compliance with GDPR, DPDP, and regulatory privacy mandates</div>
+                </div>
+              </div>
+              <div class="schematic-caption">Privacy Principles ↔ Enclave Surveillance Guardrails</div>
+            `
           },
           {
-            name: "Data Loss Prevention (DLP)",
+            name: "Data Loss Prevention",
             title: "DLP: The Guard Bag-Check at the Exit",
-            desc: "Ensures departing contractors do not walk out carrying community master blueprints or sensitive resident files."
+            desc: "Ensures departing contractors do not walk out carrying community master blueprints or sensitive resident files via USB, email, or unencrypted sync.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Exit Boom Barrier</span></div>
+                  <div class="layer-title">Security Guard Inspecting Contractor Bags at Gate</div>
+                  <div class="layer-detail">Stopping paper blueprints and spare keys from leaving the premises</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--accent);">
+                  <div class="layer-header"><span style="color:var(--accent);">CISSP D2: Asset Security</span><span>DLP Control</span></div>
+                  <div class="layer-title">Monitoring Data in Motion, at Rest, and in Use</div>
+                  <div class="layer-detail">Blocking unauthorized exfiltration to USBs, personal emails, or web</div>
+                </div>
+              </div>
+              <div class="schematic-caption">DLP Exfiltration Defense ↔ Enclave Gate Bag Check</div>
+            `
           }
         ]
       },
@@ -518,22 +739,86 @@
           {
             name: "Zero Trust (ZTA)",
             title: "Zero Trust: Never Trust, Always Verify",
-            desc: "Being physically inside the community perimeter does not grant automatic access to any villa. Every door and utility room requires independent verification."
+            desc: "Being physically inside the community perimeter does not grant automatic access to any villa. Every door and utility room requires continuous, context-based verification.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Houses #71-80</span></div>
+                  <div class="layer-title">Being Inside the Gate Doesn't Unlock Private Doors</div>
+                  <div class="layer-detail">Every lane and villa door asks for separate keycard authentication</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--highlight);">
+                  <div class="layer-header"><span style="color:var(--highlight);">CISSP D3: Architecture</span><span>NIST SP 800-207</span></div>
+                  <div class="layer-title">Zero Trust Architecture (ZTA): PEP & PDP Engine</div>
+                  <div class="layer-detail">Continuous, context-driven verification regardless of network location</div>
+                </div>
+              </div>
+              <div class="schematic-caption">Zero Trust Paradigm ↔ Enclave Multi-Door Verification</div>
+            `
           },
           {
             name: "Shared Responsibility",
             title: "Shared Responsibility: On-Prem vs Cloud Storage",
-            desc: "If the society rents an off-site commercial storage locker (Cloud), the provider guards the warehouse perimeter, but the society remains 100% responsible for who holds the padlock keys."
+            desc: "If the society rents an off-site commercial storage locker (Cloud), the provider guards the warehouse perimeter, but the society remains 100% responsible for who holds the padlock keys.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Off-Site Storage</span></div>
+                  <div class="layer-title">Warehouse Guards the Building; You Hold the Padlock Key</div>
+                  <div class="layer-detail">Off-site company protects outer walls; Enclave owns inside goods</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--highlight);">
+                  <div class="layer-header"><span style="color:var(--highlight);">CISSP D3: Architecture</span><span>Cloud Security</span></div>
+                  <div class="layer-title">Cloud Shared Responsibility Matrix (CSP vs Customer)</div>
+                  <div class="layer-detail">CSP manages physical datacenter; Customer secures data and IAM</div>
+                </div>
+              </div>
+              <div class="schematic-caption">Shared Responsibility ↔ Commercial Lockers</div>
+            `
           },
           {
             name: "OT / Purdue Model",
             title: "OT/ICS Security: Isolating the Utility Grid",
-            desc: "Water booster pumps and high-voltage electrical transformers must never be connected directly to the open resident Wi-Fi. An air-gap or strict industrial firewall isolates vital physical systems."
+            desc: "Water booster pumps and high-voltage electrical transformers must never be connected directly to the open resident Wi-Fi. An air-gap or strict industrial DMZ isolates vital physical systems.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Pump House</span></div>
+                  <div class="layer-title">Physical Water Booster Pumps Air-Gapped from Public Wi-Fi</div>
+                  <div class="layer-detail">No resident app can directly trigger electrical breakers or valves</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--highlight);">
+                  <div class="layer-header"><span style="color:var(--highlight);">CISSP D3: Architecture</span><span>Purdue ICS Model</span></div>
+                  <div class="layer-title">Level 0/1 (Pumps) ➔ Level 3 (SCADA) ➔ IDMZ ➔ Enterprise IT</div>
+                  <div class="layer-detail">Strict structural boundary between IT enterprise and OT physical safety</div>
+                </div>
+              </div>
+              <div class="schematic-caption">Purdue Model ↔ Enclave Utility Air-Gapping</div>
+            `
           },
           {
             name: "Defense in Depth",
             title: "Defense in Depth: Concentric Rings of Protection",
-            desc: "Outer perimeter wall $\rightarrow$ boom barrier $\rightarrow$ street gate $\rightarrow$ front deadbolt $\rightarrow$ bedroom safe. If any single layer fails, the next layer prevents total compromise."
+            desc: "Outer perimeter wall $\rightarrow$ boom barrier $\rightarrow$ street gate $\rightarrow$ front deadbolt $\rightarrow$ bedroom safe. If any single layer fails, the next layer prevents total compromise.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Estate Layout</span></div>
+                  <div class="layer-title">Outer Moat ➔ Perimeter Fence ➔ Lane Gate ➔ Deadbolt</div>
+                  <div class="layer-detail">Intruder bypassing the front boom barrier is stopped by house deadbolt</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--highlight);">
+                  <div class="layer-header"><span style="color:var(--highlight);">CISSP D3: Architecture</span><span>Layered Defense</span></div>
+                  <div class="layer-title">Edge Firewall ➔ WAF ➔ Host EDR ➔ Database Encryption</div>
+                  <div class="layer-detail">Eliminating single points of failure through multi-layered controls</div>
+                </div>
+              </div>
+              <div class="schematic-caption">Defense in Depth ↔ Enclave Concentric Barriers</div>
+            `
           }
         ]
       },
@@ -549,22 +834,86 @@
           {
             name: "Micro-segmentation",
             title: "Micro-segmentation: Isolated Service Lanes",
-            desc: "Heavy supply trucks, guest taxis, and resident cars do not share one narrow path. Traffic is separated into virtual lanes (VLANs) so a stalled delivery van cannot block emergency ambulances."
+            desc: "Heavy supply trucks, guest taxis, and resident cars do not share one narrow path. Traffic is separated into virtual lanes (VLANs) so a stalled delivery van cannot block emergency ambulances.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Houses #61-70</span></div>
+                  <div class="layer-title">Bypass Lanes for Courier Trucks vs Resident Streets</div>
+                  <div class="layer-detail">A crash on the commercial service ramp never blocks villa avenues</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--highlight);">
+                  <div class="layer-header"><span style="color:var(--highlight);">CISSP D4: Network Security</span><span>VLAN Segmentation</span></div>
+                  <div class="layer-title">Software-Defined Micro-segmentation & East-West Firewalls</div>
+                  <div class="layer-detail">Preventing lateral threat traversal between servers and user subnets</div>
+                </div>
+              </div>
+              <div class="schematic-caption">Micro-segmentation ↔ Enclave Dedicated Lanes</div>
+            `
           },
           {
             name: "Encryption (TLS/VPN)",
             title: "Encrypted Pipelines: Shielded Intercom Tubing",
-            desc: "Intercom wires are encased in armored, cryptographically sealed conduits. Even if someone splices an audio jack into the wire, they hear only scrambled noise instead of private conversations."
+            desc: "Intercom wires are encased in armored, cryptographically sealed conduits. Even if someone splices an audio jack into the wire, they hear only scrambled noise instead of private conversations.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Cabling Conduits</span></div>
+                  <div class="layer-title">Armored Conduit Pipe Protecting Estate Intercom Wire</div>
+                  <div class="layer-detail">Tapping into the wire yields only scrambled, unlistenable static</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--highlight);">
+                  <div class="layer-header"><span style="color:var(--highlight);">CISSP D4: Network Security</span><span>Cryptographic Transit</span></div>
+                  <div class="layer-title">TLS 1.3 / IPsec Tunnels with AES-GCM Encapsulation</div>
+                  <div class="layer-detail">Ensuring confidentiality and integrity across untrusted networks</div>
+                </div>
+              </div>
+              <div class="schematic-caption">TLS Encryption ↔ Armored Intercom Tubing</div>
+            `
           },
           {
             name: "DDoS Mitigation",
             title: "DDoS Defense: Anti-Tailgating Roundabouts",
-            desc: "When 10,000 automated delivery bots try to swarm the front gate simultaneously to overwhelm the guards, an automated buffer queue diverts traffic to prevent legitimate residents from being locked out."
+            desc: "When 10,000 automated delivery bots try to swarm the front gate simultaneously to overwhelm the guards, an automated buffer queue diverts traffic to prevent legitimate residents from being locked out.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Gate 1 Roundabout</span></div>
+                  <div class="layer-title">Holding Loop for Swarming Delivery Bikes at Peak Hours</div>
+                  <div class="layer-detail">Diverting suspicious surge vehicles into holding corrals away from gate</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--highlight);">
+                  <div class="layer-header"><span style="color:var(--highlight);">CISSP D4: Network Security</span><span>Traffic Scrubbing</span></div>
+                  <div class="layer-title">Anycast Scrubbing Centers & Dynamic Rate Limiting</div>
+                  <div class="layer-detail">Absorbing volumetric SYN/UDP floods before hitting origin servers</div>
+                </div>
+              </div>
+              <div class="schematic-caption">DDoS Scrubbing ↔ Enclave Holding Roundabouts</div>
+            `
           },
           {
             name: "Firewalls & Proxies",
             title: "Inspection Checkpoints: The Security Guard Hut",
-            desc: "Inspects incoming parcels and passenger manifests against allowlists and blocklists before vehicles are permitted past the outer gate."
+            desc: "Inspects incoming parcels and passenger manifests against allowlists and blocklists before vehicles are permitted past the outer gate.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Gate Sentry</span></div>
+                  <div class="layer-title">Guard Checking Vehicle Cargo Manifest Against Allowlist</div>
+                  <div class="layer-detail">Banning unauthorized delivery trucks before they cross the gate line</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--highlight);">
+                  <div class="layer-header"><span style="color:var(--highlight);">CISSP D4: Network Security</span><span>NGFW Inspection</span></div>
+                  <div class="layer-title">Stateful Packet Inspection & Layer 7 Application Filtering</div>
+                  <div class="layer-detail">Dropping malicious payloads and enforcing bidirectional traffic policy</div>
+                </div>
+              </div>
+              <div class="schematic-caption">Firewall Rules ↔ Enclave Guardhouse Manifest</div>
+            `
           }
         ]
       },
@@ -580,22 +929,86 @@
           {
             name: "Least Privilege (PoLP)",
             title: "Least Privilege: Scoped Access Cards",
-            desc: "The swimming pool cleaner's keycard opens the chemical storage shed and nothing else. They cannot access villa master bedrooms or the electrical transformer room."
+            desc: "The swimming pool cleaner's keycard opens the chemical storage shed and nothing else. They cannot access villa master bedrooms or the electrical transformer room.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Houses #1-10</span></div>
+                  <div class="layer-title">Pool Cleaner's Fob Only Unlocks the Pool Filter Shed</div>
+                  <div class="layer-detail">Zero access to private villa bedrooms or electrical substation</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--amber);">
+                  <div class="layer-header"><span style="color:var(--amber);">CISSP D5: IAM</span><span>Principle of Least Privilege</span></div>
+                  <div class="layer-title">Zero Standing Privileges (ZSP) & Scoped IAM Roles</div>
+                  <div class="layer-detail">Users receive minimum permissions necessary to complete job functions</div>
+                </div>
+              </div>
+              <div class="schematic-caption">Least Privilege ↔ Scoped Keycard Authorization</div>
+            `
           },
           {
             name: "Multi-Factor Auth (MFA)",
             title: "MFA: Keycard + Intercom Confirmation",
-            desc: "Something you have (keycard) combined with something you are (biometric fingerprint) or something you know (PIN). Breaching a single factor is not enough to pass the gate."
+            desc: "Something you have (keycard) combined with something you are (biometric fingerprint) or something you know (PIN). Breaching a single factor is not enough to pass the gate.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Gate Terminal</span></div>
+                  <div class="layer-title">Scanning RFID Fob + Entering PIN + Resident App Approval</div>
+                  <div class="layer-detail">Stealing a resident's key fob is useless without the passcode</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--amber);">
+                  <div class="layer-header"><span style="color:var(--amber);">CISSP D5: IAM</span><span>FIDO2 / MFA</span></div>
+                  <div class="layer-title">Multi-Factor Authentication (Knowledge + Possession + Inherence)</div>
+                  <div class="layer-detail">Requiring distinct credential categories to prevent credential stuffing</div>
+                </div>
+              </div>
+              <div class="schematic-caption">MFA Factor Verification ↔ Enclave Triple-Check Gate</div>
+            `
           },
           {
             name: "Privileged Access (PAM)",
             title: "PAM: The Dual-Custody Master Key Cabinet",
-            desc: "The master key that unlocks all infrastructure valves is kept inside a dual-key safe requiring both the Society President and Chief Warden to sign a ledger and check it out for a strictly timed 2-hour window."
+            desc: "The master key that unlocks all infrastructure valves is kept inside a dual-key safe requiring both the Society President and Chief Warden to sign a ledger and check it out for a strictly timed 2-hour window.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Vault Safe</span></div>
+                  <div class="layer-title">Master Key Safe Requiring 2 Board Signatures & 2-Hr Return</div>
+                  <div class="layer-detail">No single guard carries the master skeleton key unsupervised</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--amber);">
+                  <div class="layer-header"><span style="color:var(--amber);">CISSP D5: IAM</span><span>Privileged Access (PAM)</span></div>
+                  <div class="layer-title">Just-in-Time (JIT) Elevation with Session Recording</div>
+                  <div class="layer-detail">Dual approval vaults with automated credential rotation and auditing</div>
+                </div>
+              </div>
+              <div class="schematic-caption">PAM Dual Custody ↔ Enclave Master Key Checkout</div>
+            `
           },
           {
-            name: "Role-Based Access (RBAC)",
+            name: "Role-Based Access",
             title: "RBAC: Uniform Badge Clearances",
-            desc: "Access is tied to the role, not the individual. Any guard hired on shift receives 'Guard Clearance Level 2'; when they leave the job, their clearance is instantly revoked."
+            desc: "Access is tied to the role, not the individual. Any guard hired on shift receives 'Guard Clearance Level 2'; when they leave the job, their clearance is instantly revoked.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Guard Uniforms</span></div>
+                  <div class="layer-title">Any Guard Wearing Shift Badge Gets Access to Watchtower</div>
+                  <div class="layer-detail">When employment terminates, turning in the uniform ends all access</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--amber);">
+                  <div class="layer-header"><span style="color:var(--amber);">CISSP D5: IAM</span><span>Access Control Matrix</span></div>
+                  <div class="layer-title">Role-Based Access Control (RBAC) & Dynamic Attributes (ABAC)</div>
+                  <div class="layer-detail">Decoupling permissions from individual users to simplify lifecycle ops</div>
+                </div>
+              </div>
+              <div class="schematic-caption">RBAC Clearances ↔ Enclave Staff Uniform Badging</div>
+            `
           }
         ]
       },
@@ -611,22 +1024,86 @@
           {
             name: "Red vs Blue Team",
             title: "Red Team Drills: Attacker vs Defender Exercises",
-            desc: "The society hires an external specialist (Red Team) to disguise themselves as a plumber and attempt entry, testing if gate guards (Blue Team) spot the forged credentials."
+            desc: "The society hires an external specialist (Red Team) to disguise themselves as a plumber and attempt entry, testing if gate guards (Blue Team) spot the forged credentials.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Houses #31-40</span></div>
+                  <div class="layer-title">Hired Actor in Plumber Overalls Probing Back Wall Fences</div>
+                  <div class="layer-detail">Testing whether night sentries detect trespassers or sleep on duty</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--danger);">
+                  <div class="layer-header"><span style="color:var(--danger);">CISSP D6: Assessment</span><span>Adversary Emulation</span></div>
+                  <div class="layer-title">Red Team (Offensive TTPs) vs Blue Team (Detection / SOC)</div>
+                  <div class="layer-detail">Continuous adversary emulation to validate defense posture in real time</div>
+                </div>
+              </div>
+              <div class="schematic-caption">Red Teaming ↔ Enclave Infiltration Drills</div>
+            `
           },
           {
             name: "Vulnerability Scans",
             title: "CVSS Severity: Scoring Fence Defects",
-            desc: "A broken deadbolt on a back door is a CVSS 9.8 (Critical—immediate breach risk); a faded lane number sign is a CVSS 2.0 (Low). Repairs are prioritized by risk score."
+            desc: "A broken deadbolt on a back door is a CVSS 9.8 (Critical—immediate breach risk); a faded lane number sign is a CVSS 2.0 (Low). Repairs are prioritized by risk score.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Perimeter Walk</span></div>
+                  <div class="layer-title">Inspector Tagging Broken Latches with Colored Warning Flags</div>
+                  <div class="layer-detail">Red tag on broken rear deadbolt ➔ Fixed by maintenance crew today</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--danger);">
+                  <div class="layer-header"><span style="color:var(--danger);">CISSP D6: Assessment</span><span>CVSS v3.1 Matrix</span></div>
+                  <div class="layer-title">Automated Vulnerability Scanning & Risk Remediation SLAs</div>
+                  <div class="layer-detail">Triage: Critical (9-10), High (7-8.9), Medium (4-6.9), Low (0-3.9)</div>
+                </div>
+              </div>
+              <div class="schematic-caption">CVSS Prioritization ↔ Enclave Defect Tagging</div>
+            `
           },
           {
             name: "STRIDE Threat Model",
             title: "STRIDE: Systematic Hazard Brainstorming",
-            desc: "Before building a new automated gate, engineers evaluate: Can someone <strong>Spoof</strong> an RFID card? <strong>Tamper</strong> with the wire? <strong>Repudiate</strong> having entered? Steal <strong>Information</strong>? Crash it (<strong>Denial of Service</strong>)? Or gain <strong>Elevation of Privilege</strong>?"
+            desc: "Before building a new automated gate, engineers evaluate: Can someone <strong>Spoof</strong> an RFID card? <strong>Tamper</strong> with the wire? <strong>Repudiate</strong> having entered? Steal <strong>Information</strong>? Crash it (<strong>Denial of Service</strong>)? Or gain <strong>Elevation of Privilege</strong>?",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Engineering Desk</span></div>
+                  <div class="layer-title">Brainstorming How a Thief Could Hack the New Barrier Gate</div>
+                  <div class="layer-detail">Can someone cut the sensor cable? Clone an RFID card? Trip the motor?</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--danger);">
+                  <div class="layer-header"><span style="color:var(--danger);">CISSP D6: Assessment</span><span>Threat Modeling</span></div>
+                  <div class="layer-title">STRIDE Framework: Spoof, Tamper, Repudiate, Info, DoS, Priv</div>
+                  <div class="layer-detail">Systematic architectural hazard analysis before code goes to production</div>
+                </div>
+              </div>
+              <div class="schematic-caption">STRIDE Modeling ↔ Enclave Pre-Build Hazard Review</div>
+            `
           },
           {
             name: "Disaster Drills",
             title: "Tabletop Simulations: Power Grid Collapse",
-            desc: "Practicing what the community will do if the electrical substation catches fire at 2 AM on a stormy night, verifying that backup generators start in under 60 seconds."
+            desc: "Practicing what the community will do if the electrical substation catches fire at 2 AM on a stormy night, verifying that backup generators start in under 60 seconds.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Estate Substation</span></div>
+                  <div class="layer-title">Night Blackout Simulation: Checking Diesel Generator Startup</div>
+                  <div class="layer-detail">Verifying emergency water pumps and gate barriers run on battery power</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--danger);">
+                  <div class="layer-header"><span style="color:var(--danger);">CISSP D6: Assessment</span><span>Business Continuity</span></div>
+                  <div class="layer-title">Disaster Recovery (DR) & Incident Tabletop Simulation</div>
+                  <div class="layer-detail">Validating RTO (Recovery Time) and RPO (Recovery Point) objectives</div>
+                </div>
+              </div>
+              <div class="schematic-caption">BCP/DR Drills ↔ Enclave Generator Failover Tests</div>
+            `
           }
         ]
       },
@@ -642,22 +1119,86 @@
           {
             name: "SIEM Correlation",
             title: "SIEM: Connecting the Dots in Real Time",
-            desc: "A dog barking is noise. A sensor beeping at Gate 3 is noise. But Gate 3 beeping + motion sensor tripping at House #12 two minutes later = an orchestrated break-in alarm."
+            desc: "A dog barking is noise. A sensor beeping at Gate 3 is noise. But Gate 3 beeping + motion sensor tripping at House #12 two minutes later = an orchestrated break-in alarm.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Houses #41-50</span></div>
+                  <div class="layer-title">CCTV Wall Correlating Fence Trip + Lane 4 Motion Sensor</div>
+                  <div class="layer-detail">Separating isolated noises from coordinated intruder movements</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--accent);">
+                  <div class="layer-header"><span style="color:var(--accent);">CISSP D7: SecOps</span><span>SIEM Engine</span></div>
+                  <div class="layer-title">Security Information & Event Management (SIEM) Correlation</div>
+                  <div class="layer-detail">Aggregating logs from endpoints, auth servers, and network taps</div>
+                </div>
+              </div>
+              <div class="schematic-caption">SIEM Correlation ↔ Enclave Multi-Sensor CCTV Wall</div>
+            `
           },
           {
             name: "PICERL Incident Steps",
             title: "PICERL: The 6-Step Breach Playbook",
-            desc: "<strong>Preparation</strong> (flashlights ready), <strong>Identification</strong> (spotting the intruder), <strong>Containment</strong> (locking the lane gates), <strong>Eradication</strong> (removing the threat), <strong>Recovery</strong> (repairing locks), and <strong>Lessons Learned</strong>."
+            desc: "<strong>Preparation</strong> (flashlights ready), <strong>Identification</strong> (spotting the intruder), <strong>Containment</strong> (locking the lane gates), <strong>Eradication</strong> (removing the threat), <strong>Recovery</strong> (repairing locks), and <strong>Lessons Learned</strong>.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Warden Dispatch</span></div>
+                  <div class="layer-title">Alarm Trip ➔ Lock Lane Gate ➔ Apprehend Intruder ➔ Debrief</div>
+                  <div class="layer-detail">Coordinated guard response to isolate break-ins and protect neighbors</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--accent);">
+                  <div class="layer-header"><span style="color:var(--accent);">CISSP D7: SecOps</span><span>Incident Response</span></div>
+                  <div class="layer-title">PICERL: Prepare ➔ Identify ➔ Contain ➔ Eradicate ➔ Recover</div>
+                  <div class="layer-detail">Standardized computer security incident response lifecycle (NIST/SANS)</div>
+                </div>
+              </div>
+              <div class="schematic-caption">PICERL Playbook ↔ Enclave Intruder Lockdown</div>
+            `
           },
           {
             name: "DFIR Forensics",
             title: "Forensics: Preserving Evidence & Chain of Custody",
-            desc: "Securing the crime scene without stepping on footprints. In digital terms: taking bit-by-bit hard drive snapshots and hashing video footage so evidence is legally admissible in court."
+            desc: "Securing the crime scene without stepping on footprints. In digital terms: taking bit-by-bit hard drive snapshots and hashing video footage so evidence is legally admissible in court.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Police CSI Kit</span></div>
+                  <div class="layer-title">Sealing Muddy Footprints with Evidence Tape for Police</div>
+                  <div class="layer-detail">Guards never touch intruder fingerprints or tamper with crime scenes</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--accent);">
+                  <div class="layer-header"><span style="color:var(--accent);">CISSP D7: SecOps</span><span>Digital Forensics</span></div>
+                  <div class="layer-title">Chain of Custody, Write-Blockers & Cryptographic Hashes</div>
+                  <div class="layer-detail">Bit-stream preservation ensuring evidence is legally admissible in court</div>
+                </div>
+              </div>
+              <div class="schematic-caption">Digital Forensics ↔ Enclave CSI Evidence Bags</div>
+            `
           },
           {
             name: "Threat Hunting",
             title: "Proactive Hunting: Patrolling the Dark Alleys",
-            desc: "Guards don't just sit waiting for sirens. Threat hunting involves actively inspecting shadows, hidden crawlspaces, and service tunnels where stealthy intruders may already be lurking silently."
+            desc: "Guards don't just sit waiting for sirens. Threat hunting involves actively inspecting shadows, hidden crawlspaces, and service tunnels where stealthy intruders may already be lurking silently.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Night Watchmen</span></div>
+                  <div class="layer-title">Guards Walking Dark Back Alleys Looking for Cut Fences</div>
+                  <div class="layer-detail">Active foot patrol looking for stealthy trespassers before alarms trip</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--accent);">
+                  <div class="layer-header"><span style="color:var(--accent);">CISSP D7: SecOps</span><span>Hypothesis Hunting</span></div>
+                  <div class="layer-title">Proactive Threat Hunting using MITRE ATT&CK TTPs</div>
+                  <div class="layer-detail">Searching for dormant persistence mechanisms that bypassed passive alarms</div>
+                </div>
+              </div>
+              <div class="schematic-caption">Threat Hunting ↔ Enclave Proactive Back-Alley Patrols</div>
+            `
           }
         ]
       },
@@ -673,22 +1214,86 @@
           {
             name: "OWASP Top 10",
             title: "OWASP Top 10: Common Software Flaws",
-            desc: "The universal catalogue of coding mistakes: Input Injection, Broken Authentication, Sensitive Data Exposure, and Security Misconfigurations that allow attackers to bypass software logic."
+            desc: "The universal catalogue of coding mistakes: Input Injection, Broken Authentication, Sensitive Data Exposure, and Security Misconfigurations that allow attackers to bypass software logic.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Houses #11-25</span></div>
+                  <div class="layer-title">Self-Service Visitor Touchscreen Tablet at Front Gate</div>
+                  <div class="layer-detail">Preventing visitors from typing weird characters that crash gate software</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--highlight);">
+                  <div class="layer-header"><span style="color:var(--highlight);">CISSP D8: AppSec</span><span>OWASP Top 10</span></div>
+                  <div class="layer-title">Standard Application Flaws: Broken Auth, SQLi, SSRF, XSS</div>
+                  <div class="layer-detail">Industry benchmark for cataloguing and mitigating web vulnerabilities</div>
+                </div>
+              </div>
+              <div class="schematic-caption">OWASP Benchmark ↔ Enclave Visitor Tablet Hardening</div>
+            `
           },
           {
             name: "Input Validation",
             title: "Sanitizing Input: The Parcel Chute Sizer",
-            desc: "If a visitor types `' OR '1'='1` into the gate tablet, the system treats it strictly as a plain text name string, neutralizing the attempt to trick the database into unlocking every gate."
+            desc: "If a visitor types `' OR '1'='1` into the gate tablet, the system treats it strictly as a plain text name string, neutralizing the attempt to trick the database into unlocking every gate.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Parcel Sizer</span></div>
+                  <div class="layer-title">Physical Steel Template Rejecting Oversized Parcels</div>
+                  <div class="layer-detail">Ensuring odd-shaped packages cannot be jammed into automated chutes</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--highlight);">
+                  <div class="layer-header"><span style="color:var(--highlight);">CISSP D8: AppSec</span><span>Input Sanitization</span></div>
+                  <div class="layer-title">Parameterized Queries & Strict Server-Side Allowlisting</div>
+                  <div class="layer-detail">Treating user input strictly as literal strings to neutralize injection flaws</div>
+                </div>
+              </div>
+              <div class="schematic-caption">Input Sanitization ↔ Enclave Parcel Chute Sizer</div>
+            `
           },
           {
             name: "Shift-Left / CI/CD",
             title: "Shift-Left: Inspecting Blueprints Early",
-            desc: "Testing software for security vulnerabilities during design and coding, rather than trying to patch security flaws after the application is already running in production."
+            desc: "Testing software for security vulnerabilities during design and coding, rather than trying to patch security flaws after the application is already running in production.",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Architect Blueprints</span></div>
+                  <div class="layer-title">Reviewing Gatehouse Blueprints Before Concrete is Poured</div>
+                  <div class="layer-detail">Catching architectural design errors early before physical buildings exist</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--highlight);">
+                  <div class="layer-header"><span style="color:var(--highlight);">CISSP D8: AppSec</span><span>DevSecOps Shift-Left</span></div>
+                  <div class="layer-title">Automated Security Checks in CI/CD (SAST, SCA, Linters)</div>
+                  <div class="layer-detail">Testing software during coding, reducing remediation costs exponentially</div>
+                </div>
+              </div>
+              <div class="schematic-caption">DevSecOps Shift-Left ↔ Enclave Pre-Construction Blueprint Review</div>
+            `
           },
           {
             name: "SAST & DAST",
             title: "SAST & DAST: Static & Dynamic Inspections",
-            desc: "Reading blueprints line-by-line before construction (Static Analysis) and aggressively rattling the completed door handle with automated tools once installed (Dynamic Analysis)."
+            desc: "Reading blueprints line-by-line before construction (Static Analysis) and aggressively rattling the completed door handle with automated tools once installed (Dynamic Analysis).",
+            diagramHtml: `
+              <div class="schematic-box">
+                <div class="layer-card">
+                  <div class="layer-header"><span style="color:var(--amber);">Enclave Physical Reality</span><span>Two-Stage Inspection</span></div>
+                  <div class="layer-title">Examining Wiring Schematics + Rattling Installed Gate Handle</div>
+                  <div class="layer-detail">Paper blueprint inspection followed by physical stress testing of lock</div>
+                </div>
+                <div class="layer-divider">▲ Direct Operational Translation ▼</div>
+                <div class="layer-card" style="border-color:var(--highlight);">
+                  <div class="layer-header"><span style="color:var(--highlight);">CISSP D8: AppSec</span><span>Testing Spectrum</span></div>
+                  <div class="layer-title">SAST (Static White-Box Code) + DAST (Dynamic Black-Box Runtime)</div>
+                  <div class="layer-detail">Comprehensive code audit paired with active outside exploitation probes</div>
+                </div>
+              </div>
+              <div class="schematic-caption">SAST & DAST ↔ Enclave Blueprint & Lock Testing</div>
+            `
           }
         ]
       }
@@ -786,10 +1391,14 @@
       document.querySelectorAll('.lens-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
 
-      document.getElementById('lensContent').innerHTML = `
+      // Update Text Column
+      document.getElementById('lensContentText').innerHTML = `
         <strong style="color:var(--highlight); font-size:1.05rem; display:block; margin-bottom:0.5rem;">${lens.title}</strong>
         <p style="color:var(--text-dim);">${lens.desc}</p>
       `;
+
+      // Update Diagram Column (Dual-Layer Enclave Schematic)
+      document.getElementById('lensContentDiagram').innerHTML = lens.diagramHtml;
     }
 
     // Default Initialization
